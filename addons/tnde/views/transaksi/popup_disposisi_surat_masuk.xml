@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_surat_masuk_fix_popup" model="ir.ui.view">
+		<field name="name">Disposisi Surat Masuk</field>
+		<field name="model">surat.masuk.disposisi</field>
+		<field name="arch" type="xml">
+			<form string="Disposisi Surat Masuk">
+				<group col="4" colspan="4">
+					<field name="surat_masuk_fix_id" invisible='1' />
+					<field name="employee_id" invisible='1' />
+					<field name="tujuan_id" options="{'no_create':true}"/>
+					<field name="catatan_disposisi" />
+				</group>
+				<footer>
+					<button name="kirim_surat_disposisi" string="Kirim Surat"
+						type="object" default_focus="1" class="oe_highlight" />
+					or
+					<button string="Cancel" class="oe_link" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="popup_disposisi_surat_masuk" model="ir.actions.act_window">
+		<field name="name">Wizard Surat Masuk</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">surat.masuk.disposisi</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_surat_masuk_fix_popup" />
+		<field name="target">new</field>
+	</record>
+
+	<record model="ir.ui.view" id="list_disposisi_sm">
+		<field name="name">surat_masuk.list</field>
+		<field name="model">surat.masuk.disposisi</field>
+		<field name="arch" type="xml">
+			<tree string="berita list" create="false" update="false" delete="false">
+				<field name="create_uid" string="Dari" />
+				<field name="tujuan_id" />
+				<field name="catatan_disposisi" />
+			</tree>
+		</field> <!-- end arch -->
+	</record>
+
+
+	<!-- <menuitem id="menu_surat_masuk" parent="mcs_mahasiswa.menu_siamed_1" 
+		sequence="5" action="action_surat_masuk_wizard" groups="mcs_mahasiswa.group_prodi"/> -->
+</odoo>

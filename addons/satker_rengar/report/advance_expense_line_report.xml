@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="report_advance_expense"
+            model="advance.expense.line"
+            string="Rincian Anggaran Biaya"
+            report_type="qweb-pdf"
+            name="satker_rengar.report_advance_expense_show"
+            file="satker_rengar.report_advance_expense_show"
+        />
+
+        <record id="satker_rengar_paperformat" model="report.paperformat">
+            <field name="name">Satker Rengar Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <!-- <field name="format">custom</field> -->
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">7</field> 
+            <field name="margin_bottom">7</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('satker_rengar.report_advance_expense')), (4, ref('satker_rengar.report_head_kertas_kerja'))]"/>
+        </record>
+
+        <template id="report_advance_expense_show">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <style type="text/css">
+                        .table td{padding:10px !important}
+                    </style>
+
+                    <t t-set="alpha" t-value="['n/a','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']"/>
+
+                    <div class="row">
+                        <div class="text-left" style="width:30%">
+                            <p class="text-center" style="border-bottom:1px solid black">
+                                MARKAS BESAR<br/>
+                                KEPOLISIAN NEGARA REPUBLIK INDONESIA<br/>
+                                PUSAT PENELITIAN DAN PENGEMBANGAN<br/>
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-center">
+                                RINCIAN ANGGARAN BIAYA (RAB)<br/>
+                                <span t-field="doc.note" style="text-transform: uppercase;"/><br/>
+                                <!-- KELUARAN (OUTPUT) <span t-field="doc.advance_line_id.rengar_output.name" style="text-transform: uppercase;"/><br/> -->
+                                <!-- KEGIATAN <span t-field="doc.advance_line_id.rengar_kegiatan.name" style="text-transform: uppercase;"/> T.A. <span t-field="doc.advance_id.tahun_anggaran"/><br/> -->
+                                <!-- <center><hr style="border-top: 2px solid black; width:80%; margin:0px; padding:0px"/></center> -->
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="text-left" style="margin: 20px 0">
+                        <table>
+                            <tr>
+                                <td width="500px">Kementrian Negara/Lembaga</td>
+                                <td width="30px">:</td>
+                                <td>Kepolisian Negara Republik Indonesia</td>
+                            </tr>
+                            <tr>
+                                <td>Unit Eselon II / Satker</td>
+                                <td>:</td>
+                                <td>Puslitbang Polri</td>
+                            </tr>
+                            <tr>
+                                <td>Program</td>
+                                <td>:</td>
+                                <td><span t-field="doc.advance_id.rengar_program.name"/></td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan</td>
+                                <td>:</td>
+                                <td><span t-field="doc.advance_line_id.rengar_kegiatan.name"/></td>
+                            </tr>
+                            <tr>
+                                <td>Keluaran (Output)</td>
+                                <td>:</td>
+                                <td><span t-field="doc.advance_line_id.rengar_output.name"/></td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Judul</td>
+                                <td>:</td>
+                                <td><span t-field="doc.note"/></td>
+                            </tr> -->
+                            <tr>
+                                <td>Volume</td>
+                                <td>:</td>
+                                <!-- <td><span t-field="doc.total_volume"/></td> -->
+                                <td><span t-field="doc.time_volume"/></td>
+                            </tr>
+                            <tr>
+                                <td>Satuan Ukur</td>
+                                <td>:</td>
+                                <td>Bulan</td>
+                            </tr>
+                            <tr>
+                                <td>Alokasi Dana</td>
+                                <td>:</td>
+                                <td>Rp <span t-field="doc.total_amount"/>,-</td>
+                            </tr>
+                            <tr t-if="doc.total_realisasi">
+                                <td>Realisasi Dana</td>
+                                <td>:</td>
+                                <td>Rp <span t-field="doc.total_realisasi"/>,-</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p style="font-size:18px">Tahapan 1 - Perencanaan</p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:80px">KODE</th>
+                                <th>RINCIAN</th>
+                                <th class="text-center" style="width:200px">URAIAN</th>
+                                <th class="text-center" style="width:200px">VOLUME</th>
+                                <th class="text-right" style="width:200px">HARGA SATUAN</th>
+                                <th class="text-right" style="width:200px">JUMLAH BIAYA</th>
+                                <th class="text-right" style="width:200px" t-if="doc.total_realisasi">REALISASI</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="header1" t-value="[]"/>
+                            <t t-foreach="doc.advance_expense_line_ids" t-as="l">
+                                <t t-set="header1" t-value="header1+[l.detail1]"/>
+                            </t>
+
+                            <t t-foreach="set(header1)" t-as="hd1">
+                                <t t-set="no" t-value="1"/>
+                                <!-- Header 1 -->
+                                <tr>
+                                    <td class="text-center"><span t-esc="hd1.account_id.code"/></td>
+                                    <td colspan="4"><strong t-esc="hd1.name"/></td>
+                                    <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv1(doc.id, hd1.id, 'header1')))"/></td>
+                                    <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv1(doc.id, hd1.id, 'header1_real')))"/></td>
+                                </tr>
+
+                                <t t-set="compare_header2" t-value="0"/>
+                                <t t-set="noh2" t-value="1"/>
+                                <t t-foreach="doc.advance_expense_line_ids" t-as="line">
+                                    <t t-if="hd1.id == line.detail1.id">
+                                        <!-- Header 2 -->
+                                        <t t-if="compare_header2 != line.detail2.id">
+                                            <tr>
+                                                <td class="text-center"><span t-esc="line.detail2.account_id.code"/></td>
+                                                <td colspan="4"><span style="margin-left:20px"/> <strong t-esc="alpha[noh2]"/><b>.</b> <t t-set="noh2" t-value="noh2 + 1" style="margin-left:5px"/> <strong t-esc="line.detail2.name"/></td>
+                                                <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv1(doc.id, line.detail1.id, 'header2', line.detail2.id)))"/></td>
+                                                <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv1(doc.id, line.detail1.id, 'header2_real', line.detail2.id)))"/></td>
+                                                <t t-set="compare_header2" t-value="line.detail2.id"/>
+                                            </tr>
+                                        </t>
+
+                                        <!-- Detail 3 -->
+                                        <tr>
+                                            <td class="text-center"><span t-esc="line.detail3.account_id.code"/></td>
+                                            <td><span style="margin-left:20px"/> <span t-esc="no"/><t t-set="no" t-value="no + 1"/>. <span t-field="line.detail3"/></td>
+                                            <td class="text-center"><span t-field="line.uraian"/></td>
+                                            <td class="text-center"><span t-field="line.quantity"/></td>
+                                            <!--<td class="text-center"><span t-field="line.product_uom_id.name"/></td>-->
+                                            <td class="text-right"><span t-field="line.unit_amount"/></td>
+                                            <td class="text-right">
+                                                <span t-field="line.total_amount"/>
+                                                <i t-if="line.revised" style="color:red"><br/>Semula <span t-field="line.revised"/></i>
+                                            </td>
+                                            <td class="text-right" t-if="doc.total_realisasi"><span t-field="line.realisasi_amount"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <!-- Footer -->
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <p style="font-size:18px">Tahapan 2 - Pelaksanaan</p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:80px">KODE</th>
+                                <th>RINCIAN</th>
+                                <th class="text-center" style="width:200px">URAIAN</th>
+                                <th class="text-center" style="width:200px">VOLUME</th>
+                                <th class="text-right" style="width:200px">HARGA SATUAN</th>
+                                <th class="text-right" style="width:200px">JUMLAH BIAYA</th>
+                                <th class="text-right" style="width:200px" t-if="doc.total_realisasi">REALISASI</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="header1" t-value="[]"/>
+                            <t t-foreach="doc.advance_expense_line_ids2" t-as="l">
+                                <t t-set="header1" t-value="header1+[l.detail1]"/>
+                            </t>
+
+                            <t t-foreach="set(header1)" t-as="hd1">
+                                <t t-set="no" t-value="1"/>
+                                <!-- Header 1 -->
+                                <tr>
+                                    <td class="text-center"><span t-esc="hd1.account_id.code"/></td>
+                                    <td colspan="4"><strong t-esc="hd1.name"/></td>
+                                    <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv2(doc.id, hd1.id, 'header1')))"/></td>
+                                    <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv2(doc.id, hd1.id, 'header1_real')))"/></td>
+                                </tr>
+
+                                <t t-set="compare_header2" t-value="0"/>
+                                <t t-set="noh2" t-value="1"/>
+                                <t t-foreach="doc.advance_expense_line_ids2" t-as="line">
+                                    <t t-if="hd1.id == line.detail1.id">
+                                        <!-- Header 2 -->
+                                        <t t-if="compare_header2 != line.detail2.id">
+                                            <tr>
+                                                <td class="text-center"><span t-esc="line.detail2.account_id.code"/></td>
+                                                <td colspan="4"><span style="margin-left:20px"/> <strong t-esc="alpha[noh2]"/><b>.</b> <t t-set="noh2" t-value="noh2 + 1" style="margin-left:5px"/> <strong t-esc="line.detail2.name"/></td>
+                                                <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv2(doc.id, line.detail1.id, 'header2', line.detail2.id)))"/></td>
+                                                <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv2(doc.id, line.detail1.id, 'header2_real', line.detail2.id)))"/></td>
+                                                <t t-set="compare_header2" t-value="line.detail2.id"/>
+                                            </tr>
+                                        </t>
+
+                                        <!-- Detail 3 -->
+                                        <tr>
+                                            <td class="text-center"><span t-esc="line.detail3.account_id.code"/></td>
+                                            <td><span style="margin-left:20px"/> <span t-esc="no"/><t t-set="no" t-value="no + 1"/>. <span t-field="line.detail3" style="margin-left:10px"/></td>
+                                            <td class="text-center"><span t-field="line.uraian"/></td>
+                                            <td class="text-center"><span t-field="line.quantity"/></td>
+                                            <!--<td class="text-center"><span t-field="line.product_uom_id.name"/></td>-->
+                                            <td class="text-right"><span t-field="line.unit_amount"/></td>
+                                            <td class="text-right">
+                                                <span t-field="line.total_amount"/>
+                                                <i t-if="line.revised" style="color:red"><br/>Semula <span t-field="line.revised"/></i>
+                                            </td>
+                                            <td class="text-right" t-if="doc.total_realisasi"><span t-field="line.realisasi_amount"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <!-- Footer -->
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <p style="font-size:18px">Tahapan 3 - Akhir</p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:80px">KODE</th>
+                                <th>RINCIAN</th>
+                                <th class="text-center" style="width:200px">URAIAN</th>
+                                <th class="text-center" style="width:200px">VOLUME</th>
+                                <th class="text-right" style="width:200px">HARGA SATUAN</th>
+                                <th class="text-right" style="width:200px">JUMLAH BIAYA</th>
+                                <th class="text-right" style="width:200px" t-if="doc.total_realisasi">REALISASI</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="header1" t-value="[]"/>
+                            <t t-foreach="doc.advance_expense_line_ids3" t-as="l">
+                                <t t-set="header1" t-value="header1+[l.detail1]"/>
+                            </t>
+
+                            <t t-foreach="set(header1)" t-as="hd1">
+                                <t t-set="no" t-value="1"/>
+                                <!-- Header 1 -->
+                                <tr>
+                                    <td class="text-center"><span t-esc="hd1.account_id.code"/></td>
+                                    <td colspan="4"><strong t-esc="hd1.name"/></td>
+                                    <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv3(doc.id, hd1.id, 'header1')))"/></td>
+                                    <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv3(doc.id, hd1.id, 'header1_real')))"/></td>
+                                </tr>
+
+                                <t t-set="compare_header2" t-value="0"/>
+                                <t t-set="noh2" t-value="1"/>
+                                <t t-foreach="doc.advance_expense_line_ids3" t-as="line">
+                                    <t t-if="hd1.id == line.detail1.id">
+                                        <!-- Header 2 -->
+                                        <t t-if="compare_header2 != line.detail2.id">
+                                            <tr>
+                                                <td class="text-center"><span t-esc="line.detail2.account_id.code"/></td>
+                                                <td colspan="4"><span style="margin-left:20px"/> <strong t-esc="alpha[noh2]"/><b>.</b> <t t-set="noh2" t-value="noh2 + 1" style="margin-left:5px"/> <strong t-esc="line.detail2.name"/></td>
+                                                <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv3(doc.id, line.detail1.id, 'header2', line.detail2.id)))"/></td>
+                                                <td class="text-right" t-if="doc.total_realisasi"><strong t-esc="'{0:,.0f}'.format(int(doc.get_header_adv3(doc.id, line.detail1.id, 'header2_real', line.detail2.id)))"/></td>
+                                                <t t-set="compare_header2" t-value="line.detail2.id"/>
+                                            </tr>
+                                        </t>
+
+                                        <!-- Detail 3 -->
+                                        <tr>
+                                            <td class="text-center"><span t-esc="line.detail3.account_id.code"/></td>
+                                            <td><span style="margin-left:20px"/> <span t-esc="no"/><t t-set="no" t-value="no + 1"/>. <span t-field="line.detail3" style="margin-left:10px"/></td>
+                                            <td class="text-center"><span t-field="line.uraian"/></td>
+                                            <td class="text-center"><span t-field="line.quantity"/></td>
+                                            <!--<td class="text-center"><span t-field="line.product_uom_id.name"/></td>-->
+                                            <td class="text-right"><span t-field="line.unit_amount"/></td>
+                                            <td class="text-right">
+                                                <span t-field="line.total_amount"/>
+                                                <i t-if="line.revised" style="color:red"><br/>Semula <span t-field="line.revised"/></i>
+                                            </td>
+                                            <td class="text-right" t-if="doc.total_realisasi"><span t-field="line.realisasi_amount"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <!-- Footer -->
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- <p style="page-break-before:always;"> </p> -->
+                    <table style="width:100%"><tr><td>
+                        <div class="text-center" style="width:30%; float:right">
+                            Bogor, <span t-esc="time.strftime('%d %B %Y')"/><br/>
+                            <span t-esc="doc.department_id.manager_id.job_id.name"/><br/>
+                            <!-- <p style="height:60px"/> -->
+                            <br/><br/><br/><br/><br/><br/>
+                            <u><span t-esc="doc.department_id.manager_id.name"/></u><br/>
+                            <span t-esc="doc.department_id.manager_id.pangkat_id.name"/>
+                            NRP
+                            <span t-esc="doc.department_id.manager_id.nrp_nip"/>
+                        </div>
+                    </td></tr></table>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

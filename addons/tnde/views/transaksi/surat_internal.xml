@@ -1,0 +1,106 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="surat_internal_view_form_id">
+			<field name="name">surat internal form</field>
+			<field name="model">surat_internal</field>
+			<field name="arch" type="xml">
+				<form string="surat_internal Form">
+					<header>
+						<!-- <field name="user.id"/> -->
+						<!-- <field name="current_user" invisible="1"/> -->
+						<field name="state" widget="statusbar" statusbar_visible="Buat Surat, Draft,ACC Konseptor,Selesai"/>
+						<button name="confirm" type="object" string="Confirm" states="Buat Surat"/>
+ 						<button name="create_number" type="object" string="Beri Nomor Surat" states="ACC Konseptor" />						
+ 						<button name="acc_konseptor" type="object" string="ACC Konseptor" states="Draft" groups="tnde.konseptor"/>						
+ 						<!-- <button name="create_number" type="object" string="Beri Nomor Surat" states="Proses" groups="tnde.akses_tnde_tu"/>						 -->
+ 					</header>  
+				<sheet>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Perihal Surat" />
+						<h2>
+							<field name="name"/> 
+							<field name="no_surat" groups="base.group_system"/> 
+							<field name="no_urut" groups="base.group_system"/>
+						</h2>
+					</div>
+					<group>
+					    <field name="jenis_surat" options="{'no_create':true}"/>
+					    <field name="kode_sekunder" options="{'no_create':true}"/>
+					    <field name="bidbag"/>
+					 	<field name="tgl_surat" />					 	
+					 	<field name="penandatangan" options="{'no_create':true}"/>
+					 	<field name="konseptor" options="{'no_create':true}"/>
+					 	<field name="tujuan_surat"  widget="many2many_tags"  options="{'no_create':true}"/>
+						<field name="tindakan" widget="radio"/>
+						<field name="date_due" style="width: 100%"  placeholder="Wajib Diisi"  attrs="{'invisible': [('tindakan','!=','Cepat')]}"/>
+						<field name="scan_surat" filename="lampiran" />
+						<field name="lampiran" invisible="True" />
+					</group>
+					<group >				
+						<field name="keterangan" attrs="{'readonly':[('state', '=', 'Selesai')]}" widget="html" nolabel="1" cols="20" rows="10"/>
+					</group>
+					<group string="Versioning Surat">
+						<field name="history_surat_internal_ids" nolabel="1" colspan="4">
+					         <tree>
+				                <field name="name"/>
+								<field name="scan_surat" filename="lampiran" />
+								<field name="lampiran" invisible="True" />
+				                <field name="create_date" style="width:20%" />
+					         </tree>
+					    </field>
+					</group>
+				</sheet>
+					<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+			</field>
+		</record>
+
+
+		<!--  ________ berita view tree _______-->
+	<record model="ir.ui.view" id="surat_internal_view_tree_id">
+	    <field name="name">surat_internal.list</field>
+	    <field name="model">surat_internal</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="berita list" colors="red:tindakan=='Cepat' and current_date &gt; date_due " default_order='date_due'>
+		    	<field name="jenis_surat"/>
+		    	<field name="tgl_surat"/>
+   			 	<field name="name"/>
+   			 	<field name="no_surat"/>
+		    	<field name="tindakan"/>
+		    	<field name="date_due"/>
+   			 	<field name="state"/>
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<!--  ________ berita view search _______-->
+	<record model="ir.ui.view" id="surat_internal_view_search_id">
+	    <field name="name">surat_internal.search</field>
+	    <field name="model">surat_internal</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (search) -->
+			<search>
+    			<field name="name"/> 
+    			<field name="no_surat"/> 
+			</search>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<record model="ir.ui.view" id="surat_internal_kanban_id">
+	    <field name="name">surat_internal.kanban</field>
+	    <field name="model">surat_internal</field>
+	    <field name="arch" type="xml">
+			<graph>
+			    <field name="name"/> 
+    			<field name="no_surat"/> 
+    			<field name="tgl_surat"/>
+			</graph>
+	    </field>  
+	</record>
+
+	</data>
+</odoo>

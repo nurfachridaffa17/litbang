@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record model="ir.ui.view" id="survey_question_form_inherit">
+		    <field name="name">Survey Question Inherit</field>           
+		    <field name="model">survey.question</field>                                  
+		    <field name="inherit_id" ref="survey.survey_question_form"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="//div[@class='oe_title']" position="after">
+		    		<div class="oe_title" style="width: 100%;">
+                        <label for="description" string="Pertanyaan lanjutan" class="oe_edit_only"/>
+                        <field name="description" widget="html" />
+                        <separator />
+                    </div>
+		    	</xpath>
+		    </field>
+		</record>
+       
+		<record model="ir.ui.view" id="survey_form_inherit">
+		    <field name="name">Survey Inherit</field>           
+		    <field name="model">survey.survey</field>                                  
+		    <field name="inherit_id" ref="survey.survey_form"/>
+		    <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <field name="description" widget="html" string="Petunjuk"/>
+                        <field name="responden"/>
+                        <field name="kelompok" placeholder="Penelitian, Kajian, ..."/>
+                    </group>
+                </xpath>
+			   
+                <field name="users_can_go_back" position="after">
+                    <field name="department_id"/>
+                    <field name="polda_id"/>
+                </field>
+                <field name="kelompok" position="after">
+                    <field name="link_sheet_1" widget="url" readonly="1" invisible="1"/>
+                    <field name="link_sheet_2" widget="url" readonly="1" invisible="1"/>
+                </field>
+                <xpath expr="//page[2]" position="after">
+                        <page string="Narasi Admin">
+                        <group>
+                            <field name="narasi"/>
+                            <field name="public_publish"/>				
+                        </group>
+                    </page>		
+                </xpath>
+				<xpath expr="//notebook" position="after">
+					<group>
+						<label for="date_start" string="Waktu Mulai"/>
+                        <div >
+                            <field name="date_start" class="oe_inline" nolabel="1"/>
+                            <label string="sampai" class="oe_inline" />
+                            <field name="date_end" class="oe_inline" nolabel="1" />			   				
+                        </div>
+                        <field name="tahun" style="width:80px" />
+                        <field name="generate" style="width:80px" invisible="1"/>
+					</group>
+				</xpath>
+
+ 				<xpath expr="/form/header/button[@name='action_send_survey']" position="after">
+ 					
+ 					<button name="action_result_survey_admin" string="Check Results" type="object" class="oe_highlight" attrs="{'invisible':['|',('tot_start_survey','=',0),('stage_id','!=',3)]}" groups="mcs_survey.group_admin_bidgasbin,mcs_survey.group_admin_bidgasops,mcs_survey.group_admin_bidrikwastu,mcs_survey.group_admin_baglabtekpol"/>
+ 					
+ 					<button name="publish_to_public" string="Post to Public" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id','!=',3),('public_publish','=',True)]}" confirm="apakah anda yakin ingin mem-publish survey ini ke public?" groups="mcs_survey.group_admin_bidgasbin,mcs_survey.group_admin_bidgasops,mcs_survey.group_admin_bidrikwastu,mcs_survey.group_admin_baglabtekpol"/>
+ 				</xpath>
+				<button name="action_test_survey" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</button>
+				<xpath expr="/form/header/button[@name='action_print_survey']" position="after">
+ 					<button name="action_link_mulai_survey" string="Start Survey" type="object" class="oe_highlight" attrs="{'invisible':['|',('id', '=', False),('stage_id','=',3)]}"/>
+ 				</xpath>
+ 				<xpath expr="//button[@name='action_result_survey'][2]" position="after">
+ 					<button name="act_link" string="Generate Report" type="object" class="oe_highlight" invisible="1"/>
+ 					<button name="reset_report" string="Reset Report" type="object" class="oe_highlight" groups="survey.group_survey_user" attrs="{'invisible': [('generate', '!=', 'Sudah')]}" invisible="1"/>
+					<button name="action_survey_report" string="PDF" type="object" class="oe_highlight" invisible="1"/>
+				</xpath>
+		    </field>
+		</record>
+		
+		<record model="ir.ui.view" id="survey_tree_inherit">
+            <field name="name">Tree view for survey</field>
+            <field name="model">survey.survey</field>
+            <field name="inherit_id" ref="survey.survey_tree"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='tot_sent_survey']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+		
+		<record model="ir.ui.view" id="survey_view_calendar_id">
+		    <field name="name">survey.calendar</field>
+		    <field name="model">survey.survey</field>
+		    <field name="arch" type="xml">
+				<calendar string="Kalender" mode="month" display="[title] - Polda: [polda_id]"
+					date_start="date_start" date_stop="date_end" 
+					color="title">
+					<field name="title"/>
+					<field name="polda_id"/>
+				</calendar> 
+		    </field> 
+		</record> 
+		
+		<record model="ir.ui.view" id="survey_view_gantt_id">
+		    <field name="name">survey.gantt</field>
+		    <field name="model">survey.survey</field>
+		    <field name="arch" type="xml">
+				<gantt string="Gantt survey" 
+					date_start="date_start" date_stop="date_end"
+					default_group_by='title' color="color" create="false">
+					<field name="title"/> 
+				</gantt>
+		    </field> 
+		</record> 		
+		
+		<record model="ir.ui.view" id="survey_view_graph_id">
+		    <field name="name">survey.graph</field>
+		    <field name="model">survey.survey</field>
+		    <field name="arch" type="xml">
+				<graph type="pie">
+					<field name="title"/>
+					<field name="tot_comp_survey" type="measure"/>
+				</graph>
+		    </field> 
+		</record> 	
+
+		<record model="ir.ui.view" id="survey_view_pivot_id">
+		    <field name="name">survey.pivot</field>
+		    <field name="model">survey.survey</field>
+		    <field name="arch" type="xml">
+				<graph type="pivot">
+					<field name="date_start" type="col" /> 
+					<field name="title" type="row" /> 
+					<field name="tot_start_survey" type="measure" />
+					<field name="tot_comp_survey" type="measure" />
+				</graph>
+				
+		    </field> 
+		</record> 
+
+		<record model="ir.ui.view" id="survey_survey_view_search_inherit">
+		    <field name="name">Survey Inherit</field>           
+		    <field name="model">survey.survey</field>                                  
+		    <field name="inherit_id" ref="survey.survey_survey_view_search"/>
+		    <field name="arch" type="xml">
+		    	<field name="title" position="after">
+		    		<field name="department_id" string="Department"/>
+		    		<field name="polda_id" string="Polda"/>
+		    	</field>
+		    </field>
+		</record>
+		<menuitem name="Answers" id="survey.menu_survey_type_form1" action="survey.action_survey_user_input" parent="survey.menu_surveys" sequence="99" groups="base.group_no_one"/>
+
+		<record model="ir.actions.act_window" id="action_survey_form_bidgasbin">
+            <field name="name">Surveys</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban,calendar,gantt</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to add a survey.</p>
+                <p>You can create surveys for different purposes: customer opinion, services feedback, recruitment interviews, employee's periodical evaluations, marketing campaigns, etc.</p>
+                <p>Design easily your survey, send invitations to answer by email and analyse answers.</p>
+            </field>
+            <field name="context">{'group_by':'stage_id','default_department_id':33}</field>
+            <field name="domain">[('department_id', '=',33)]</field>
+        </record>
+
+        <menuitem name="Survey Bidgasbin" id="menu_survey_form_bidgasbin" action="action_survey_form_bidgasbin" parent="survey.menu_surveys" sequence="2"/>
+
+        <record model="ir.actions.act_window" id="action_survey_form_bidgasops">
+            <field name="name">Surveys</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban,calendar,gantt</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to add a survey.</p>
+                <p>You can create surveys for different purposes: customer opinion, services feedback, recruitment interviews, employee's periodical evaluations, marketing campaigns, etc.</p>
+                <p>Design easily your survey, send invitations to answer by email and analyse answers.</p>
+            </field>
+            <field name="context">{'group_by':'stage_id','default_department_id':32}</field>
+            <field name="domain">[('department_id', '=',32)]</field>            
+        </record>
+
+        <menuitem name="Survey Bidgasops" id="menu_survey_form_bidgasops" action="action_survey_form_bidgasops" parent="survey.menu_surveys" sequence="3"/>
+
+        <record model="ir.actions.act_window" id="action_survey_form_bidrikwastu">
+            <field name="name">Surveys</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban,calendar,gantt</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to add a survey.</p>
+                <p>You can create surveys for different purposes: customer opinion, services feedback, recruitment interviews, employee's periodical evaluations, marketing campaigns, etc.</p>
+                <p>Design easily your survey, send invitations to answer by email and analyse answers.</p>
+            </field>
+            <field name="context">{'group_by':'stage_id','default_department_id':34}</field>
+            <field name="domain">[('department_id', '=',34)]</field>
+        </record>
+
+        <menuitem name="Survey Bidrikwastu" id="menu_survey_form_bidrikwastu" action="action_survey_form_bidrikwastu" parent="survey.menu_surveys" sequence="4"/>
+
+        <record model="ir.actions.act_window" id="action_survey_form_baglabtekpol">
+            <field name="name">Surveys</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban,calendar,gantt</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to add a survey.</p>
+                <p>You can create surveys for different purposes: customer opinion, services feedback, recruitment interviews, employee's periodical evaluations, marketing campaigns, etc.</p>
+                <p>Design easily your survey, send invitations to answer by email and analyse answers.</p>
+            </field>
+            <field name="context">{'group_by':'stage_id','default_department_id':35}</field>
+            <field name="domain">[('department_id', '=',35)]</field>
+        </record>
+
+        <menuitem name="Survey Baglabtekpol" id="menu_survey_form_baglaptekpol" action="action_survey_form_baglabtekpol" parent="survey.menu_surveys" sequence="5"/>
+        <menuitem name="Report" id="menu_survey_report" parent="survey.menu_surveys" sequence="6"/>
+        
+        <record model="ir.actions.act_window" id="action_survey_gantt">
+            <field name="name">Timeline Of Survey</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">gantt</field>
+            <field name="context">{'group_by':'department_id'}</field>
+        </record>
+        
+        <menuitem name="Timeline" id="menu_survey_gantt" action="action_survey_gantt" parent="mcs_survey.menu_survey_report" sequence="51"/>
+        
+        <record model="ir.actions.act_window" id="action_survey_pivot">
+            <field name="name">Pivot Table Of Survey</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+        </record>
+        
+        <menuitem name="Pivot Table" id="menu_survey_pivot" action="action_survey_pivot" parent="mcs_survey.menu_survey_report" sequence="52"/>
+        
+        <record model="ir.actions.act_window" id="action_survey_graph">
+            <field name="name">Chart Of Survey</field>
+            <field name="res_model">survey.survey</field>
+            <field name="view_mode">graph</field>
+            <field name="context">{'group_by':'department_id'}</field>
+        </record>
+        
+        <menuitem name="Chart" id="menu_survey_graph" action="action_survey_graph" parent="mcs_survey.menu_survey_report" sequence="53"/>
+		
+        <record model="ir.ui.view" id="inherit_survey_user_input_tree">
+            <field name="name">inherit_survey_user_input_tree</field>
+            <field name="model">survey.user_input</field>
+            <field name="inherit_id" ref="survey.survey_user_input_tree"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='quizz_score']" position="after">
+                    <field name="ref"/>
+                    <field name="jumlah_jawaban"/>
+                    <field name="cek_jawaban"/>
+              </xpath>
+              <xpath expr="//field[@name='email']" position="after">
+                    <field name="no_tab"/>
+              </xpath>
+            </field>
+        </record>
+   
+        <record model="ir.ui.view" id="tree_survey_data_tab">
+            <field name="name">Survey Data Tab Tree</field>
+            <field name="model">survey.data_tab</field>
+            <field name="arch" type="xml">
+                <tree string="Form Survey" editable="bottom">
+                    <field name="no_imei"/>
+                    <field name="no_tab"/>
+                    <field name="no_sn"/>
+                    <field name="no_koper"/>
+                    <field name="ref"/>
+                    <field name="internal_note"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="search_survey_data_tab">
+            <field name="name">Survey Data Tab Search</field>
+            <field name="model">survey.data_tab</field>
+            <field name="arch" type="xml">
+                <search string="Form Survey">
+                    <field name="no_imei"/>
+                    <field name="no_tab"/>
+                    <field name="no_sn"/>
+                    <field name="no_koper"/>
+                    <field name="ref"/>
+                    <field name="internal_note"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_survey_data_tab">
+            <field name="name">Survey Data Tab Action</field>
+            <field name="res_model">survey.data_tab</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="search_survey_data_tab"/>
+        </record>
+    
+        <menuitem id="menu_survey_config_id" name="Survey Config" parent="base.menu_custom" sequence="70"/>
+        <menuitem action="action_survey_data_tab" id="menu_action_survey_data_tab" parent="menu_survey_config_id"/>
+   
+	</data>
+</odoo>
+
+

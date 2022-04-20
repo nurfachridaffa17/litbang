@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="report_head_kertas_kerja"
+            model="head.kertas.kerja"
+            string="Rincian Anggaran Biaya"
+            report_type="qweb-pdf"
+            name="satker_rengar.report_head_kertas_kerja_show"
+            file="satker_rengar.report_head_kertas_kerja_show"
+        />
+
+        <template id="report_head_kertas_kerja_show">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="row">
+                        <div class="text-left" style="width:30%">
+                            <p class="text-center" style="border-bottom:1px solid black">
+                                MARKAS BESAR<br/>
+                                KEPOLISIAN NEGARA REPUBLIK INDONESIA<br/>
+                                PUSAT PENELITIAN DAN PENGEMBANGAN<br/>
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-center">
+                                RINCIAN ANGGARAN BIAYA (RAB)<br/>
+                                <!-- KELUARAN (OUTPUT) <span t-field="doc.advance_line_id.rengar_output.name" style="text-transform: uppercase;"/><br/>
+                                KEGIATAN <span t-field="doc.advance_line_id.rengar_kegiatan.name" style="text-transform: uppercase;"/> T.A. <span t-field="doc.advance_id.tahun_anggaran"/><br/>
+                                <center><hr style="border-top: 2px solid black; width:80%; margin:0px; padding:0px"/></center> -->
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="text-left" style="margin: 20px 0">
+                        <table>
+                            <tr>
+                                <td width="500px">Kementrian Negara/Lembaga</td>
+                                <td width="30px">:</td>
+                                <td>Kepolisian Negara Republik Indonesia</td>
+                            </tr>
+                            <tr>
+                                <td>Unit Eselon II / Satker</td>
+                                <td>:</td>
+                                <td>Puslitbang Polri</td>
+                            </tr>
+                            <tr>
+                                <td>Program</td>
+                                <td>:</td>
+                                <td><span t-field="doc.rengar_program.name"/></td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Volume</td>
+                                <td>:</td>
+                                <td><span t-field="doc.time_volume"/></td>
+                            </tr> -->
+                            <tr>
+                                <td>Satuan Ukur</td>
+                                <td>:</td>
+                                <td>Dokumen</td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Alokasi Dana</td>
+                                <td>:</td>
+                                <td>Rp <span t-field="doc.total_amount"/>,-</td>
+                            </tr>
+                            <tr t-if="doc.total_realisasi">
+                                <td>Realisasi Dana</td>
+                                <td>:</td>
+                                <td>Rp <span t-field="doc.total_realisasi"/>,-</td>
+                            </tr> -->
+                        </table>
+                    </div>
+
+                    <p style="font-size:18px">Tahapan 1 - Perencanaan</p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>RINCIAN</th>
+                                <th class="text-center" style="width:200px">VOLUME</th>
+                                <th class="text-center" style="width:200px">SATUAN</th>
+                                <th class="text-center" style="width:200px">HARGA SATUAN</th>
+                                <th class="text-center" style="width:200px">JUMLAH</th>
+                                <!-- <th class="text-center" style="width:200px" t-if="doc.total_realisasi">REALISASI</th> -->
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="header2" t-value="[]"/>
+                            <t t-set="detail2_total" t-value="0"/>
+                            <t t-set="realisasi_total" t-value="0"/>
+                            <t t-foreach="doc.advance_expense_line_ids" t-as="l">
+                                <t t-set="header2" t-value="header2+[l.rengar_komponen]"/>
+                            </t>
+
+                            <!-- Header 1 -->
+                            <t t-foreach="set(header2)" t-as="hd2">
+                                <t t-set="no" t-value="1"/>
+                                <tr>
+                                    <td colspan="6"><strong t-esc="hd2.name"/></td>
+                                </tr>
+                                <!-- <t t-foreach="doc.advance_expense_line_ids" t-as="line"> -->
+                                    <!-- Header 2 -->
+                                    <!-- <t t-if="hd2.id == line.detail2.id">
+                                        <t t-set="detail2_total" t-value="detail2_total + line.total_amount"/>
+                                        <t t-set="realisasi_total" t-value="realisasi_total + line.realisasi_amount"/>
+                                        <tr>
+                                            <td><span style="margin-left:40px"/><span t-esc="no"/><t t-set="no" t-value="no + 1"/> <span t-field="line.detail3"/></td>
+                                            <td class="text-center"><span t-field="line.quantity"/></td>
+                                            <td class="text-center"><span t-field="line.product_uom_id.name"/></td>
+                                            <td class="text-right"><span t-field="line.unit_amount"/></td>
+                                            <td class="text-right"><span t-field="line.total_amount"/></td>
+                                            <td class="text-right" t-if="doc.total_realisasi"><span t-field="line.realisasi_amount"/></td>
+                                        </tr>
+                                    </t> -->
+                                <!-- </t> -->
+                                <!-- Footer -->
+                                <!-- <tr>
+                                    <td><b>SUBTOTAL</b></td>
+                                    <td class="text-center"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(detail2_total))"/></td>
+                                    <td class="text-right"><strong t-esc="'{0:,.0f}'.format(int(realisasi_total))"/></td>
+                                </tr> -->
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="text-center" style="width:30%; float:right">
+                            Bogor, <span t-esc="time.strftime('%d %B %Y')"/><br/>
+                            KEPALA PUSAT PENELITIAN DAN PENGEMBANGAN POLRI<br/>
+                            <p style="height:60px"/>
+                            <u>DRS. INDRO WIYONO, M.Si</u><br/>
+                            BRIGADIR JENDERAL POLISI
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

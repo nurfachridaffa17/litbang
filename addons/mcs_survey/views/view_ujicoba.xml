@@ -1,0 +1,107 @@
+<odoo>
+	<data>
+		<record id="view_ujicoba_tree" model="ir.ui.view">
+            <field name="name">view_ujicoba_tree</field>
+            <field name="model">survey.ujicoba</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="document"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ujicoba_form" model="ir.ui.view">
+            <field name="name">view_ujicoba_form</field>
+            <field name="model">survey.ujicoba</field>
+            <field name="arch" type="xml">
+                <form>
+                	<header>
+                	</header>
+                	<sheet>
+                		<group>
+                			<field name="name"/>
+                			<field name="tanggal_uji"/>
+                			<field name="nomor_laporan"/>
+                			<field name="nomor_sertifikat_uji"/>
+                			<field name="document" widget="many2many_binary"/>
+                			<field name="category_id"/>
+                			<field name="kendaraan_type" attrs="{'invisible':[('category_id','!=','transportasi')]}"/>
+                			<field name="persenjataan_type" attrs="{'invisible':[('category_id','!=','persenjataan')]}"/>
+                			<field name="material_type" attrs="{'invisible':[('category_id','!=','material_khusus')]}"/>
+                			<field name="elektronika_ti_type" attrs="{'invisible':[('category_id','!=','elektronika_ti')]}"/>
+                		</group>
+                		<group>
+                			<field name="foto_product" widget="image"/>
+                		</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="survey_ujicoba_view_search" model="ir.ui.view">
+            <field name="name">survey.ujicoba.search</field>
+            <field name="model">survey.ujicoba</field>
+            <field name="arch" type="xml">
+                <search string="Ujicoba">
+                    <field string="Category" name="category_id"/>
+                    <!-- <filter string="Archived" name="inactive" domain="[('active','=',False)]"/> -->
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ujicoba_all_form">
+            <field name="name">Hasil Ujicoba All</field>
+            <field name="res_model">survey.ujicoba</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click disini untuk menambahkan hasil ujicoba</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ujicoba_persenjataan_form">
+            <field name="name">Hasil Ujicoba Persenjataan</field>
+            <field name="res_model">survey.ujicoba</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click disini untuk menambahkan hasil ujicoba</p>
+            </field>
+            <field name="domain">[('category_id', '=','persenjataan')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ujicoba_transportasi_form">
+            <field name="name">Hasil Ujicoba Transportasi</field>
+            <field name="res_model">survey.ujicoba</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click disini untuk menambahkan hasil ujicoba</p>
+            </field>
+            <field name="domain">[('category_id', '=','transportasi')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ujicoba_material_form">
+            <field name="name">Hasil Ujicoba Material</field>
+            <field name="res_model">survey.ujicoba</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click disini untuk menambahkan hasil ujicoba</p>
+            </field>
+            <field name="domain">[('category_id', '=','material_khusus')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ujicoba_elektronika_form">
+            <field name="name">Hasil Ujicoba Elektronika dan TI</field>
+            <field name="res_model">survey.ujicoba</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click disini untuk menambahkan hasil ujicoba</p>
+            </field>
+            <field name="domain">[('category_id', '=','elektronika_ti')]</field>
+        </record>
+	</data>
+</odoo>

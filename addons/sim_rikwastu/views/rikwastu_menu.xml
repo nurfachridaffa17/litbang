@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ################################################## Create Date/Time: 
+	Aug 6, 2018/1:42:43 PM Author: Matrica-User ################################################## -->
+
+<odoo>
+	<data>
+		<!-- bayu start -->
+		<record model="ir.actions.act_window" id="act_Program">
+			<field name="name">Judul Penelitian</field>
+			<field name="res_model">program</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_template">
+			<field name="name">Template Surat</field>
+			<field name="res_model">template</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>
+			<field name="domain">[]</field>
+			<field name="limit">80</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_perencanaan">
+			<field name="name">Tahap Perencanaan Program</field>
+			<field name="res_model">tahapperencanaan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>
+			<field name="domain">[]</field>
+			<field name="limit">80</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_tujuansrt">
+			<field name="name"> Tujuan Surat</field>
+			<field name="res_model">tujuansrt</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>
+			<field name="domain">[]</field>
+			<field name="limit">80</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kegiatan">
+			<field name="name"> Step Kegiatan</field>
+			<field name="res_model">kegiatan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>
+			<field name="domain">[]</field>
+			<field name="limit">80</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+		<!-- bayu end -->
+
+		<!-- __________ ACTION perencanaan_tahunan ___________ -->
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="perencanaan_tahunan_action_window_id" model="ir.actions.act_window">
+			<field name="name">Setting Pelaksanaan</field> <!-- Nama action ini muncul di breadcrump -->
+			<field name="res_model">rikwastu.perencanaan_tahunan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan data pertama</p>
+			</field>
+		</record>
+
+		
+ 
+
+		<!-- __________ ACTION pelaksanaan ___________ -->
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="pelaksanaan_action_window_id" model="ir.actions.act_window">
+			<field name="name">Pelaksanaan</field> <!-- Nama action ini muncul di breadcrump -->
+			<field name="res_model">rikwastu.pelaksanaan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan data pertama</p>
+			</field>
+		</record>
+
+		<!-- __________ ACTION finalisasi ___________ -->
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="finalisasi_action_window_id" model="ir.actions.act_window">
+			<field name="name">finalisasi</field> <!-- Nama action ini muncul di breadcrump -->
+			<field name="res_model">rikwastu.finalisasi</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan data pertama</p>
+			</field>
+		</record>
+
+		<!-- __________ ACTION master_flow ___________ -->
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="master_flow_action_window_id" model="ir.actions.act_window">
+			<field name="name">Master Flow</field> <!-- Nama action ini muncul di breadcrump -->
+			<field name="res_model">rikwastu.master_flow</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan data pertama</p>
+			</field>
+		</record>
+
+		<!-- __________ MENU rikwastu __________ -->
+		<!-- __Menu-Top__ -->
+		<menuitem name="Verifica Audit" id="rikwastu_menu_root" /> <!-- sequence="10" -->
+		<!-- __Menu-Level_1__ (categories) diperlukan di Left Bar Menu -->
+
+		<menuitem name="Perencanaan" parent="rikwastu_menu_root" id="rikwastu_menu_1"
+			sequence="1" /> <!-- sequence="10" -->
+		<menuitem name="Judul Penelitian" parent="rikwastu_menu_1"
+			id="rikwastu_menu_1_1" action="act_Program" sequence="2" /> <!-- sequence="10" -->
+		<menuitem name="Proses Perencanaan" parent="rikwastu_menu_1"
+			id="rikwastu_menu_1_2" action="act_perencanaan" sequence="3" />
+
+		<menuitem name="Pelaksanaan" parent="rikwastu_menu_root" id="rikwastu_menu_2"
+			sequence="4" /> <!-- sequence="10" -->
+		<menuitem name="Managemen Kegiatan" parent="rikwastu_menu_2"
+			id="rikwastu_menu_2_1" action="perencanaan_tahunan_action_window_id"
+			sequence="5" /> <!-- sequence="10" -->
+		<menuitem name="Proses Pelaksanaan" parent="rikwastu_menu_2"
+			id="rikwastu_menu_2_2" action="pelaksanaan_action_window_id"
+			sequence="6" /> <!-- sequence="10" -->
+
+		<!-- __Menu-Level_2__ (Call Actions) -->
+		<menuitem name="Finalisasi" parent="rikwastu_menu_root" id="rikwastu_menu_3"
+			sequence="7" />
+		<menuitem name="Proses Finalisasi" parent="rikwastu_menu_3"
+			id="rikwastu_menu_3_1" action="finalisasi_action_window_id" sequence="8" /> <!-- sequence="10" -->
+
+		<!-- __Menu-Level_2__ (Call Actions) -->
+		<menuitem name="Configurasi" parent="rikwastu_menu_root" id="rikwastu_menu_4"
+			sequence="10" />
+		<menuitem name="Master Flow" parent="rikwastu_menu_4" id="rikwastu_menu_4_1"
+			action="master_flow_action_window_id" sequence="11" /> <!-- sequence="10" -->
+		<menuitem name="Template Surat" parent="rikwastu_menu_4" id="rikwastu_menu_4_2"
+			action="act_template" sequence="12" />
+		<menuitem name="Tujuan Surat" parent="rikwastu_menu_4" id="rikwastu_menu_4_3"
+			action="act_tujuansrt" sequence="13" />
+		<menuitem name="Step Kegiatan" parent="rikwastu_menu_4" id="rikwastu_menu_4_4"
+			action="act_kegiatan" sequence="14" />
+
+
+	</data>
+</odoo>

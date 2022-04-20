@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		 
+		
+		<record model="ir.actions.act_window" id="act_Program">
+			<field name="name">Judul Penelitian</field>
+			<field name="res_model">program</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_template">
+			<field name="name">Template Surat</field>
+			<field name="res_model">template</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>  
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_perencanaan">
+			<field name="name">Tahap Perencanaan Program</field>
+			<field name="res_model">tahapperencanaan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>  
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_tujuansrt">
+			<field name="name"> Tujuan Surat</field>
+			<field name="res_model">tujuansrt</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>  
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kegiatan">
+			<field name="name"> Step Kegiatan</field>
+			<field name="res_model">kegiatan</field>
+			<field name="target">current</field>
+			<field name="context">{}</field>  
+			<field name="domain">[]</field>
+			<field name="limit">80</field>  
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,kanban</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambahkan Data</p>
+			</field>
+		</record>
+		
+		<!-- __Menu-Top__ -->
+		<menuitem name="Rikwastu" id="menu_utama_rikwastu" /> <!-- sequence="10" -->
+
+		<!-- __Menu-Level_1__ (Untuk Sub Menu TOP) -->
+		<menuitem name="Judul Penelitian" parent="menu_utama_rikwastu" id="menu_program" action="act_Program" />
+		<menuitem name="Proses Perencanaan" parent="menu_utama_rikwastu" id="menu_perencanaan" action="act_perencanaan" />
+		<menuitem name="Data Master" parent="menu_utama_rikwastu" id="menu_master" />
+
+		<menuitem name="Template Surat" parent="menu_master" id="menu_template" action="act_template" />
+		<menuitem name="Tujuan Surat" parent="menu_master" id="menu_tujuansrt" action="act_tujuansrt" />
+		<menuitem name="Step Kegiatan" parent="menu_master" id="menu_kegiatan" action="act_kegiatan" />
+
+		
+		
+	</data>
+</odoo>

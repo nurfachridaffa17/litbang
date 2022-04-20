@@ -1,0 +1,7 @@
+pgbouncer
+_pycache__/
+data/
+docker-compose.yml
+nginx.conf/nginx.conf
+config/odoo.conf
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="rengar_detail1_form_view" model="ir.ui.view">
+            <field name="name">rengar_detail1_form_view</field>
+            <field name="model">rengar.detail1</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="account_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_rengar_detail1">
+            <field name="name">Master Header 1</field>
+            <field name="res_model">rengar.detail1</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+        </record>
+    </data>
+</odoo>

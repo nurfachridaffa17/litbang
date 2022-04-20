@@ -1,0 +1,111 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="surat_keluar_view_form_id">
+			<field name="name">surat keluar form</field>
+			<field name="model">surat_keluar</field>
+			<field name="arch" type="xml">
+				<form string="surat_keluar Form">
+					<header>
+						<field name="state" widget="statusbar" statusbar_visible="Buat Surat,Draft, ACC Konseptor, ACC TAUD, ACC Sespus, ACC KAPUSLITBANG, Selesai"/>
+						<!-- <button name=selesai type="object" string="Selesai" states="Proses" groups="tnde.akses_tnde_tu"/> -->
+						<!-- <button name="submit" type="object" string="Submit" states="Buat Surat" class="oe_highlight" groups="tnde.akses_tnde_tu"/> -->
+						<!-- <button name="proses" type="object" string="Approve" states="Submit" class="oe_highlight" groups="tnde.pimpinan_kateg"/> -->
+						<!-- <button name="baca" type="object" string="Tandai Telah Dibaca" states="Submit" class="oe_highlight"/> -->
+						<button name="confirm" type="object" string="Confirm" states="Buat Surat" class="oe_highlight" /> 
+						<button name="acc_konseptor" type="object" string="ACC KONSEPTOR" states="Draft" class="oe_highlight"  groups="tnde.konseptor"/> 
+						<button name="acc_taud" type="object" string="ACC TAUD" states="ACC Konseptor" class="oe_highlight"  groups="tnde.akses_tnde_tu"/> 
+						<button name="acc_sespus" type="object" string="ACC SESPUS" states="ACC TAUD" class="oe_highlight"  groups="tnde.sespus"/> 
+						<button name="acc_kapuslitbang" type="object" string="ACC KAPUSLITBANG" states="ACC Sespus" class="oe_highlight" groups="tnde.pimpinan_kateg"/>
+
+						<button name="create_number" type="object" string="Beri Nomor Surat"  states="ACC KAPUSLITBANG"  groups="tnde.akses_tnde_tu"/>
+					</header>  
+				<sheet>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Perihal Surat" />
+						<h2>
+							<field name="name"/> 
+							<field name="no_surat" groups="base.group_system"/> 
+							<field name="no_urut" groups="base.group_system"/>
+						</h2>
+					</div>
+					<group>
+					    <field name="jenis_surat" options="{'no_create':true}"/>
+					    <field name="kd_klasifikasi" options="{'no_create':true}"/>
+					 	<field name="tgl_surat" />
+					 	<field name="kepada" options="{'no_create':true}"/>
+					 	<field name="konseptor"  widget="many2many_tags" options="{'no_create':true}"/>
+						<!-- <field name="pemrakarsa_ids" options="{'no_create':true}" widget="many2many_tags" /> -->
+					 	<field name="penandatangan" options="{'no_create':true}"/>
+					 	<!-- <field name="lampiran_srt_msk" widget="many2many_tags" options="{'no_create':true}" domain="[('state','=','Selesai')]"/> -->
+						<field name="tindakan" />
+					 	<field name="lampiran_srt_msk" widget="many2many_tags" options="{'no_create':true}" />
+						<field name="scan_surat" filename="lampiran" />
+						<field name="lampiran" invisible="True" />
+					</group>
+					<group >				
+						<field name="keterangan" attrs="{'readonly':[('state', '=', 'Selesai')]}" widget="html" nolabel="1" cols="20" rows="10"/>
+					</group>
+					<group string="Versioning Surat">
+						<field name="history_surat_keluar_ids" nolabel="1" colspan="4">
+					         <tree>
+				                <field name="name"/>
+								<field name="scan_surat" filename="lampiran" />
+								<field name="lampiran" invisible="True" />
+				                <field name="create_date"/>
+					         </tree>
+					    </field>
+					</group>
+				</sheet>
+					<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+			</field>
+		</record>
+
+
+		<!--  ________ berita view tree _______-->
+	<record model="ir.ui.view" id="surat_keluar_view_tree_id">
+	    <field name="name">surat_keluar.list</field>
+	    <field name="model">surat_keluar</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="berita list">
+		    	<field name="jenis_surat"/>
+		    	<field name="tgl_surat"/>
+   			 	<field name="name"/>
+				<field name="tindakan" />
+   			 	<field name="no_surat"/>
+   			 	<field name="state"/>
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<!--  ________ berita view search _______-->
+	<record model="ir.ui.view" id="surat_keluar_view_search_id">
+	    <field name="name">surat_keluar.search</field>
+	    <field name="model">surat_keluar</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (search) -->
+			<search>
+    			<field name="name"/> 
+    			<field name="no_surat"/> 
+			</search>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<record model="ir.ui.view" id="surat_keluar_kanban_id">
+	    <field name="name">surat_keluar.kanban</field>
+	    <field name="model">surat_keluar</field>
+	    <field name="arch" type="xml">
+			<graph>
+			    <field name="name"/> 
+    			<field name="no_surat"/> 
+    			<field name="tgl_surat"/>
+			</graph>
+	    </field>  
+	</record>
+
+	</data>
+</odoo>

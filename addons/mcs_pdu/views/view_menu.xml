@@ -1,0 +1,139 @@
+<odoo>
+	<data>
+        <!-- Action Kategori -->
+        <record model="ir.actions.act_window" id="action_kat_type1">
+            <field name="name">Transportasi Operasional</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type1')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kat_type2">
+            <field name="name">Forensik</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type2')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kat_type3">
+            <field name="name">Persenjataan</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type3')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kat_type4">
+            <field name="name">Penginderaan</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type4')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kat_type5">
+            <field name="name">Teknologi Info. dan Komunikasi</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type5')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kat_type6">
+            <field name="name">Transnational Crime</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('categ_id.kategori_id.code', '=', 'type6')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <!-- Action PDU -->
+        <record model="ir.actions.act_window" id="action_pdu">
+            <field name="name">Permohonan</field>
+            <field name="res_model">pdu.pengajuan</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form,calendar,graph,pivot</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Pengajuan</p>
+            </field>
+        </record>
+
+        <!-- Action Configuration -->
+        <record model="ir.actions.act_window" id="action_product_material">
+            <field name="name">Product Material</field>
+            <field name="res_model">product.material</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Material</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_product_kategori">
+            <field name="name">Product Kategori</field>
+            <field name="res_model">pdu.kategori</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Kategori</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_product_subkategori">
+            <field name="name">Product Sub Kategori</field>
+            <field name="res_model">pdu.subkategori</field>
+            <field name="context">{'group_by': ['kategori_id']}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Klik disini untuk menambahkan Product Sub Kategori</p>
+            </field>
+        </record>
+
+        <!-- Parent Menu -->
+        <menuitem name="PDU" id="menu_pdu" sequence="50" web_icon="mcs_pdu,static/description/icon.png"/>
+        <menuitem name="Kategori" id="menu_kategori" parent="menu_pdu" sequence="1"/>
+        <menuitem name="Permohonan Uji Coba" id="menu_proses_pdu" parent="menu_pdu" sequence="2"/>
+        <menuitem name="Konfigurasi" id="menu_konfigurasi_pdu" parent="menu_pdu" sequence="3" groups="group_pdu_manager"/>
+
+        <!-- Menu Kategori -->
+        <menuitem id="menu_kat_type1" action="action_kat_type1" parent="menu_kategori" sequence="1"/>
+        <menuitem id="menu_kat_type2" action="action_kat_type2" parent="menu_kategori" sequence="2"/>
+        <menuitem id="menu_kat_type3" action="action_kat_type3" parent="menu_kategori" sequence="3"/>
+        <menuitem id="menu_kat_type4" action="action_kat_type4" parent="menu_kategori" sequence="4"/>
+        <menuitem id="menu_kat_type5" action="action_kat_type5" parent="menu_kategori" sequence="5"/>
+        <menuitem id="menu_kat_type6" action="action_kat_type6" parent="menu_kategori" sequence="6"/>
+
+        <!-- Menu Item -->
+        <menuitem name="Persiapan" id="menu_pdu_persiapan" parent="menu_proses_pdu" action="action_pdu" sequence="1"/>
+        <menuitem name="Pelaksanaan" id="menu_pdu_pelaksanaan" parent="menu_proses_pdu" action="action_pdu" sequence="2"/>
+        <menuitem name="Persiapan Akhir" id="menu_pdu_persiapan_akhir" parent="menu_proses_pdu" action="action_pdu" sequence="3"/>
+
+        <!-- Konfigurasi -->
+        <menuitem name="Vendor" id="menu_vendor_pdu" action="base.action_partner_supplier_form" parent="menu_konfigurasi_pdu" sequence="1"/>
+        <menuitem name="Kategori" id="menu_kategori_pdu" action="action_product_kategori" parent="menu_konfigurasi_pdu" sequence="2"/>
+        <menuitem name="Sub Kategori" id="menu_subkategori_pdu" action="action_product_subkategori" parent="menu_konfigurasi_pdu" sequence="3"/>
+        <menuitem name="Material" id="menu_material_pdu" action="action_product_material" parent="menu_konfigurasi_pdu" sequence="4"/>
+    </data>
+</odoo>

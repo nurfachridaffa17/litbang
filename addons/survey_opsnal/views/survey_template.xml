@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sfinished" name="title.sFinished" inherit_id="survey.sfinished">
+            <xpath expr='//div[@class="jumbotron mt32"]/h1' position="replace">
+                <h3 t-if="survey.thank_you_message"></h3>
+                <h3 t-else="">Terima Kasih!</h3>    
+            </xpath>
+
+            <xpath expr='//div[@class="jumbotron mt32"]/h3' position="before">
+                <h3 t-field='survey.title' />
+            </xpath>
+        </template>
+
+        <template id="survey_init" inherit_id="survey.survey_init">
+            <xpath expr="//div[@class='jumbotron mt32']/h1" position="replace">
+                <h2 t-field='survey.title' />
+            </xpath>
+        </template>
+
+        <template id="page" inherit_id="survey.page">
+            <xpath expr="//div[@class='modal-body']" position="replace">
+                <div class="modal-body"><p>Jawaban Anda Telah Tersimpan<strong class="text-danger"> Silahkan Klik Tutup Dan Refresh Halaman Ini</strong></p></div>
+            </xpath>
+        </template>
+
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="JS Upgrade Timeout">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/survey_opsnal/static/src/js/survey.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>

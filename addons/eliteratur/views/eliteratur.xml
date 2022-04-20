@@ -1,0 +1,293 @@
+<odoo>
+    <data>
+
+         <template id="eliteratur" name="E-LITERATUR" page="True">
+          <style>
+            b.ex5:hover, b.ex5:active {text-decoration: underline;}
+
+            * {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            .item {
+                position: relative;
+                border: 1px solid #333;
+                margin: 2%;
+                overflow: hidden;
+                width: auto;
+                display: inline-block;
+            }
+            .item img {
+                max-width: 100%;
+                -webkit-transition: .5s ease;
+                -moz-transition: .5s ease;
+                transition: .5s ease;
+            }
+            .item:hover img {
+                -webkit-transform: scale(1.05,1.05);
+                -moz-transform: scale(1.05,1.05);
+                transform: scale(1.05,1.05);
+            }
+            .item:before {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position: absolute;
+                background: #000;
+                background: rgba(0,0,0,0.3);
+                z-index: 2;
+                opacity: 0;
+                -moz-transition: 0.5s ease;
+                -webkit-transition: 0.5s ease;
+                transition: 0.5s ease;
+            }
+            .item:hover:before {
+                opacity: 1;
+            }
+
+
+            .vertical-menu {
+              width: 200px; /* Set a width if you like */
+            }
+
+            .vertical-menu a {
+              background-color: #eee; /* Grey background color */
+              color: #1a1a1a; /* Black text color */
+              display: block; /* Make the links appear below each other */
+              padding: 12px; /* Add some padding */
+              margin-left: 5px; /* Add some margin */
+              text-decoration: none; /* Remove underline from links */
+            }
+
+            .vertical-menu a:hover {
+              background-color: #ccc; /* Dark grey background on mouse-over */
+              color: #191970;
+            }
+
+            .vertical-menu a.active {
+              background-color: #191970; /* Add a midnightblue color to the "active/current" link */
+              color: white;
+            }
+
+          </style>
+
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container1">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div class="vertical-menu" style="margin-top:1%;margin-bottom:1%;">
+                            <a t-attf-href="/eliteratur" class="active" style="font-size:16px;">KATEGORI</a>
+                          </div>
+                            <div class="vertical-menu" t-foreach="kategori" t-as="kategori" >
+                                <a t-attf-href="/eliteratur/kategori/data/#{ kategori.id }">
+                                  <b style="font-size:16px;" t-esc="kategori.name"/>
+                                </a>
+                            </div>
+                        </div>
+                            <div class="col-sm-10" style="margin-top:1%;margin-left:-9%;">
+                              <h1 class="text-center text-muted">E-LITERATUR</h1>
+                              <br/>
+
+                              <div class="col-md-2" t-foreach="objects" t-as="eliteratur">
+                                <div>
+                                   <a t-attf-href="/eliteratur/data/#{ eliteratur.id }">
+                                  <b class="ex5" t-attf-href="/eliteratur/data/#{ eliteratur.id }" style="color:#1a1a1a;font-size:15px;position: absolute;margin-top:130%;margin-left: 0%;text-align: center;%;"><t t-esc="eliteratur.name"/></b>
+                                     <div class="item" style="margin-bottom:120%;">
+                                    <img class="img-responsive" t-attf-src="data:image/*;base64,#{eliteratur.image}"/>
+                                    <div class="item-overlay top"></div>
+                                </div>
+                                  </a>
+                                </div>
+                              </div>
+                        </div>  
+                      </div>  
+                    </div>
+                </div>
+
+            </t>
+        </template>
+
+      <template id="detail_eliteratur" name="Detail E-Literatur" page="True">
+
+        <style>
+            a.ex2:hover, a.ex2:active {font-size: 150%;}
+        </style>
+
+         <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="row" >
+                            <br/>
+                            <div t-foreach="deteliteratur" t-as="dataj">
+
+                              <div class="mt32 mb48 col-md-7">
+                                 <!-- <img src="/eliteratur/static/img/mini-litbang.png" style="width: 10%; margin-left: 631px; margin-top: 3px; position: absolute;"/> -->
+                                 <iframe t-att-src="'%s' % dataj.url_file" width="700px" height="800px" />
+                              </div>
+                              <div class="mt32 mb48 col-md-4"  style="margin-left:5%">
+                                <legend> <b><span t-esc="dataj.name"/></b></legend>
+                                 <table class="table table-responsive">
+                                 <thead style="font-size:100%;">
+                                      <tr>
+                                          <th>Author</th>
+                                      </tr>
+                                      <t t-if="not dataj.author">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.author">
+                                        <tr>
+                                            <td><span t-esc="dataj.author"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Edisi</th>
+                                      </tr>
+                                      <t t-if="not dataj.edisi">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.edisi">
+                                        <tr>
+                                            <td><span t-esc="dataj.edisi"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>No. Panggil</th>
+                                      </tr>
+                                      <t t-if="not dataj.no_panggil">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.no_panggil">
+                                        <tr>
+                                            <td><span t-esc="dataj.no_panggil"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>ISBN/ ISSN</th>
+                                      </tr>
+                                      <t t-if="not dataj.isbn_issn">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.isbn_issn">
+                                        <tr>
+                                            <td><span t-esc="dataj.isbn_issn"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Topic</th>
+                                      </tr>
+                                      <t t-if="not dataj.topic_id.name">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.topic_id.name">
+                                        <tr>
+                                            <td><span t-esc="dataj.topic_id.name"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Klasifikasi</th>
+                                      </tr>
+                                      <t t-if="not dataj.klasifikasi">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.klasifikasi">
+                                        <tr>
+                                            <td><span t-esc="dataj.klasifikasi"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Judul Seri</th>
+                                      </tr>
+                                      <t t-if="not dataj.judul_seri">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.judul_seri">
+                                        <tr>
+                                            <td><span t-esc="dataj.judul_seri"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Bahasa</th>
+                                      </tr>
+                                      <t t-if="not dataj.bahasa_id.name">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.bahasa_id.name">
+                                        <tr>
+                                            <td><span t-esc="dataj.bahasa_id.name"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Penerbit</th>
+                                      </tr>
+                                      <t t-if="not dataj.penerbit">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.penerbit">
+                                        <tr>
+                                            <td><span t-esc="dataj.penerbit"/></td>
+                                        </tr>
+                                      </t>
+
+                                      <tr>
+                                          <th>Tahun, Tempat Terbit</th>
+                                      </tr>
+                                      <t t-if="not dataj.tahun_terbit">
+                                        <t t-if="not dataj.tempat_terbit_id.name">
+                                          <tr><td>-</td></tr>
+                                        </t>
+                                      </t>
+                                      <t t-if="dataj.tahun_terbit">
+                                        <t t-if="dataj.tempat_terbit_id.name">
+                                          <tr>
+                                              <td><span t-esc="dataj.tahun_terbit"/>, <span t-esc="dataj.tempat_terbit_id.name"/></td>
+                                          </tr>
+                                        </t>
+                                      </t>
+
+                                      <tr>
+                                          <th>Deskripsi</th>
+                                      </tr>
+                                       <t t-if="not dataj.deskripsi">
+                                        <tr><td>-</td></tr>
+                                      </t>
+                                      <t t-if="dataj.deskripsi">
+                                        <tr>
+                                            <td><span t-esc="dataj.deskripsi"/></td>
+                                        </tr>
+                                      </t>
+                                  </thead>
+                                </table>
+                              </div>
+                            </div>
+                        </div> 
+                 Halaman Ini adalah E-Literatur Puslitbang (Pusat penelitian dan pengembangan) Polri. <br/><br/>Dapatkan update buku, artikel atau pengumuman terbaru mengenai seputar aktivitas dan kegiatan Polri. Anda dapat membaca langsung E-Literatur disini. Jika ingin melihat daftar kategori E-Literatur Puslitbang Polri silahkan <a class="ex2" href="/eliteratur" style="color:#191970;"><strong>Klik Disini</strong></a>
+                 <br/>
+                 <br/>
+                 <br/>
+
+                    </div>
+                </div>
+
+            </t>
+      </template> 
+
+   </data>
+</odoo>

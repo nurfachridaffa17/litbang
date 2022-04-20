@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+		<record id="survey_polda_view_form" model="ir.ui.view">
+			<field name="name">survey.polda.view.form</field>
+			<field name="model">survey.polda</field>
+			<field name="arch" type="xml">
+				<form string="Polda">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+						<field name="polres_ids" nolabel="1" mode="tree" context="{'default_polda_id': active_id}"/>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="survey_form_inherit">
+		    <field name="name">Survey Inherit</field>           
+		    <field name="model">survey.survey</field>                                  
+		    <field name="inherit_id" ref="survey.survey_form"/>
+		    <field name="arch" type="xml">
+			   
+		    	<field name="users_can_go_back" position="after">
+		    		<field name="jenis_penelitian_id" />
+				</field>
+
+				<field name="polda_id" position="after">
+					<field name="polres_id" context="{'default_polda_id': polda_id}"/>
+					<field name="fungsi" />
+					<field name="triwulan" />
+				</field>
+
+				<xpath expr="//page[3]" position="inside">
+                    <group>
+						<label for="thank_you_message" string="Pesan Terima Kasih"/>
+							<field name="thank_you_message" class="oe_inline" nolabel="1"/>
+					</group>
+                </xpath>
+
+		    </field>
+		</record>
+        
+    </data>
+</odoo>

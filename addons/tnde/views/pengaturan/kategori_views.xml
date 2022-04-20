@@ -1,0 +1,24 @@
+<odoo>
+<data>
+		<record id="kategori_tree_view" model="ir.ui.view">
+			<field name="name">TNDE TREE VIEW</field>
+			<field name="model">tnde.kategori</field>
+			<field name="arch" type="xml">
+			<tree string="berita list">
+		    	<field name="name"/>
+			</tree>
+		</field>
+		</record>
+
+		<record id="kategori_form_view" model="ir.ui.view">
+			<field name="name">TNDE FORM VIEW</field>
+			<field name="model">tnde.kategori</field>
+			<field name="arch" type="xml">
+			<form string="berita form">
+		    	<field name="name"/>
+			</form>
+		</field>
+		</record>
+
+</data>
+</odoo>

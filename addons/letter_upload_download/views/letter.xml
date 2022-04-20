@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="letter_tree" model="ir.ui.view">
+            <field name="name">letter.tree</field>
+            <field name="model">letter</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Letter">
+                    <field name="ltr_type"/>
+                    <field name="document"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="letter_form" model="ir.ui.view">
+            <field name="name">letter.form</field>
+            <field name="model">letter</field>
+            <field name="arch" type="xml">
+                <form string="Letter">
+                    <sheet>
+                        <group>
+                            <field name="ltr_type" />
+                            <field name="document" widget="binary" filename="document_name" />
+                            <field name="document_name" invisible="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_letter" model="ir.actions.act_window">
+            <field name="name">Letter</field>
+            <field name="res_model">letter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create Letter
+                </p>
+            </field>
+        </record>
+        <menuitem name="Letter" id="menu_letter" parent="hr.menu_hr_root" sequence="10"
+            action="action_letter" groups="base.group_user"/>
+
+        <record id="letter_employee_form" model="ir.ui.view">
+            <field name="name">letter.view.employee.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="download" string="Download Letter Template" type="object" class="oe_highlight"/>
+                    </header>
+                </xpath>
+                <xpath expr="//notebook/page['1']/group/group['1']/field[@name='address_id']" position="after">
+                    <field name="letter" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

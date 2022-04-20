@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="sim_riswaktu.list">
+      <field name="name">sim_riswaktu list</field>
+      <field name="model">sim_riswaktu.sim_riswaktu</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="sim_riswaktu.action_window">
+      <field name="name">sim_riswaktu window</field>
+      <field name="res_model">sim_riswaktu.sim_riswaktu</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="sim_riswaktu.action_server">
+      <field name="name">sim_riswaktu server</field>
+      <field name="model_id" ref="model_sim_riswaktu_sim_riswaktu"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="sim_riswaktu" id="sim_riswaktu.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="sim_riswaktu.menu_1" parent="sim_riswaktu.menu_root"/>
+    <menuitem name="Menu 2" id="sim_riswaktu.menu_2" parent="sim_riswaktu.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="sim_riswaktu.menu_1_list" parent="sim_riswaktu.menu_1"
+              action="sim_riswaktu.action_window"/>
+    <menuitem name="Server to list" id="sim_riswaktu" parent="sim_riswaktu.menu_2"
+              action="sim_riswaktu.action_server"/>
+    -->
+  </data>
+</odoo>

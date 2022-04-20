@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+############################################################################
+#
+#  Module Name: print_xlsx
+#  File Name: account_move_view.xml
+#  Created On: 03/01/2019, 11:09
+#  Description:  Sistem Informasi print_xlsx
+#  Author: Kevinn Ernest
+#
+############################################################################-->
+
+<odoo>
+    <data>
+        <!-- inherit-->
+        <record model="ir.ui.view" id="view_order_form_inherit_sale_stock">
+            <field name="name">print_xlsx cetak_excel form inherit</field>
+            <field name="model">head.kertas.kerja</field>
+            <field name="inherit_id" ref="satker_rengar.head_kertas_kerja_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='exit_cancel']" position="after">
+                    <button name="button_excel" string="Print Excel" type="object" icon="fa-print"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

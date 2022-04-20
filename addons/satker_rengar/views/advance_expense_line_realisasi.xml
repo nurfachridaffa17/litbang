@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="advance_expense_line_realisasi_form_view" model="ir.ui.view">
+            <field name="name">advance.expense.line.realisasi.form.view</field>
+            <field name="model">advance.expense.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Confirm" name="set_real_confirm" states="Approve" type="object" class="oe_highlight" groups="satker_rengar.group_rengar_user"/>
+                        <button string="Approve" name="set_real_approve" states="RConfirm" type="object" groups="satker_rengar.group_rengar_manager" class="oe_highlight"/>
+                        <button string="Done" name="set_to_done" states="RApprove" type="object" groups="satker_rengar.group_rengar_manager" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="Approve,RConfirm,RApprove,Done" colspan="2"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <!-- <field name="categ_id" domain="[('code','!=',False)]"/> -->
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="product_id" invisible="1" domain="[('can_be_expensed','=',True)]" context="{'default_can_be_expensed': True, 'default_purchase_ok': False, 'default_sale_ok': False}" string="Sub Komponen"/>
+                            <field name="advance_id" required="1" options="{'no_create': True}" placeholder="[Tahun Anggaran] Nama Program"/>
+                            <field name="advance_line_id" required="1" domain="[('advance_id', '=', advance_id)]" options="{'no_create': True}" placeholder="Nama Output / Nama Sub Output / Komponen / Sub Komponen"/>
+                            <!-- <field name="rengar_komponen" required="1"/> -->
+                            <!-- <field name="rengar_subkomponen" required="1"/> -->
+                            <field name="note"/>
+                            <field name="description" invisible="1"/>
+                            <field name="quantity" string="Volume" invisible="1"/>
+                            <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom" invisible="1"/>
+                            <field name="unit_amount" string="Harga Satuan" invisible="1" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_realisasi" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <notebook>
+                            <page string="Tahapan 1 - Perencanaan">
+                                <field name="advance_expense_line_ids">
+                                    <tree editable="bottom" colors="red:state=='Reject'; blue:state=='Done';">
+                                        <field name="detail1" string="Header 1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail2" string="Header 2" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail3" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="quantity" string="Volume"/>
+                                        <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                                        <field name="unit_amount" string="Harga Satuan" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Amount"/>
+                                        <field name="realisasi_amount" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Realisasi"/>
+										<field name="state" readonly="1"/>
+                                        <button type="object" name="set_to_done" string="Setuju" states="Confirm" icon="fa-check" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_reject" string="Tolak" states="Confirm" icon="fa-remove" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_draft" string="Revisi" states="Reject" icon="fa-edit" groups="satker_rengar.group_rengar_user"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tahapan 2 - Pelaksanaan">
+                                <field name="advance_expense_line_ids2">
+                                    <tree editable="bottom" colors="red:state=='Reject'; blue:state=='Done';">
+                                        <field name="detail1" string="Header 1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail2" string="Header 2" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail3" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="quantity" string="Volume"/>
+                                        <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                                        <field name="unit_amount" string="Harga Satuan" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Amount"/>
+                                        <field name="realisasi_amount" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Realisasi"/>
+										<field name="state" readonly="1"/>
+                                        <button type="object" name="set_to_done" string="Setuju" states="Confirm" icon="fa-check" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_reject" string="Tolak" states="Confirm" icon="fa-remove" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_draft" string="Revisi" states="Reject" icon="fa-edit" groups="satker_rengar.group_rengar_user"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tahapan 3 - Akhir">
+                                <field name="advance_expense_line_ids3">
+                                    <tree editable="bottom" colors="red:state=='Reject'; blue:state=='Done';">
+                                        <field name="detail1" string="Header 1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail2" string="Header 2" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="detail3" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                        <field name="quantity" string="Volume"/>
+                                        <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                                        <field name="unit_amount" string="Harga Satuan" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Amount"/>
+                                        <field name="realisasi_amount" widget="monetary" options="{'currency_field': 'currency_id'}" sum="Total Realisasi"/>
+										<field name="state" readonly="1"/>
+                                        <button type="object" name="set_to_done" string="Setuju" states="Confirm" icon="fa-check" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_reject" string="Tolak" states="Confirm" icon="fa-remove" groups="satker_rengar.group_rengar_manager"/>
+                                        <button type="object" name="set_to_draft" string="Revisi" states="Reject" icon="fa-edit" groups="satker_rengar.group_rengar_user"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+					<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+       
+        <record id="advance_expense_line_realisasi_tree_view" model="ir.ui.view">
+            <field name="name">advance.expense.line.realisasi.tree.view</field>
+            <field name="model">advance.expense.line</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="advance_line_id"/>
+                    <!-- <field name="rengar_komponen"/> -->
+                    <!-- <field name="rengar_subkomponen"/> -->
+                    <field name="note"/>
+                    <field name="product_id" invisible="1"/>
+                    <field name="description" invisible="1"/>
+                    <field name="quantity" string="Volume"/>
+                    <field name="unit_amount" string="Harga Satuan" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="product_uom_id" invisible="1" string="Unit of Measure" groups="product.group_uom" readonly="1"/>
+                    <!-- <field name="currency_id"/> -->
+                    <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="state" string="Status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_realisasi_kertas_kerja">
+            <field name="name">Realisasi Kertas Kerja</field>
+            <field name="res_model">advance.expense.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','Approve')]</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_form">
+            <field name="sequence" eval="4"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_form_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_tree">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_tree_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_realisasi_kertas_kerja_approve">
+            <field name="name">Persetujuan Realisasi</field>
+            <field name="res_model">advance.expense.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','RConfirm')]</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_approve_form">
+            <field name="sequence" eval="4"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_form_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja_approve"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_approve_tree">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_tree_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja_approve"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_realisasi_kertas_kerja_all">
+            <field name="name">Sudah Terealisasi</field>
+            <field name="res_model">advance.expense.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', 'in', [('RApprove'), ('Done')])]</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_all_form">
+            <field name="sequence" eval="4"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_form_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja_all"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_realisasi_kertas_kerja_all_tree">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="advance_expense_line_realisasi_tree_view"/>
+            <field name="act_window_id" ref="action_realisasi_kertas_kerja_all"/>
+        </record>
+    </data>
+</odoo>

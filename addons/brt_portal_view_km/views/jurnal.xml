@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+         <template id="jurnal" name="List Journal" page="True">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="mt32 mb48 col-md-12">
+                              <legend><b style="font-size:26px">LIST JURNAL</b></legend>
+                              <div class="mt32 mb48 col-md-3"  t-foreach="objects" t-as="jurnal" >
+                                <div>
+                                  <a t-attf-href="/jurnal/data/#{ jurnal.id }">
+                                    <b style="font-size: 15px;position: absolute;margin-top: 67%;margin-left: 0%;width: 75%;text-align: center;%;" t-esc="jurnal.name"/>
+                                    <img src="/brt_portal_view_km/static/img/LOGO-JURNAL.png" width="85%"/>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </t>
+        </template>
+
+      <template id="detail_jurnal" name="Detail Jurnal" page="True">
+         <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="row" >
+                            <br/>
+                            <div t-foreach="detjurnal" t-as="dataj">
+
+                              <div class="mt32 mb48 col-md-7">
+                                 <img src="/brt_portal_view_km/static/img/mini-litbang.png" style="width: 10%; margin-left: 631px; margin-top: 3px; position: absolute;"/>
+                                 <iframe t-att-src="'%s' % dataj.url_file" width="700px" height="800px" />
+                              </div>
+                              <div class="mt32 mb48 col-md-4"  style="margin-left:5%">
+                                 <legend> <b><span t-esc="dataj.name"/></b></legend>
+                                 <i style="font-size:12px;">Date Post : <span t-esc="dataj.create_date"/></i>
+                                 <br/>
+                                 <br/>
+                                 <i style="font-size:14px;"><span t-esc="dataj.ket"/></i>
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <br/>
+
+                                 <hr/>
+                                 Halaman Ini adalah Jurnal Puslitbang (Pusat penelitian dan pengembangan) Polri. <br/><br/>Dapatkan update berita jurnal terbaru mengenai seputar aktivitas dan kegiatan Polri. Anda dapat membaca langsung jurnal disini. jika ingin melihat daftar jurnal Puslitbang Polri silahkan <a href="/jurnal">Klik Disini</a>
+                                 <!-- <span t-esc="dataj.ket"/> -->
+                              </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </t>
+      </template> 
+
+   </data>
+</odoo>

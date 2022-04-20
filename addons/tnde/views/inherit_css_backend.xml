@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+  <data>
+    
+  <template id="tnde.theme_home_css" name="Youngtree" inherit_id="web.assets_backend" active="True" customize_show="False">
+        <xpath expr="." position="inside">
+        
+          <link rel="stylesheet" href="/tnde/static/css/brata.css" />
+          
+           
+        </xpath>
+    </template>
+  
+  </data>
+</odoo>

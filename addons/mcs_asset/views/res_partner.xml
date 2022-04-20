@@ -1,0 +1,11 @@
+<odoo>
+<data>
+        <menuitem name="Vendor Management"
+            id="menu_vendor_mgt"
+            parent="base.menu_mro_root"
+            action="base.action_partner_supplier_form"
+            sequence="100"/>
+            
+
+</data>
+</odoo>

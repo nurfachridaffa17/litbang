@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="dashboard_inherit" inherit_id="web_settings_dashboard.web_settings_dashboard_action">
+    <t t-extend="DashboardShare">
+        <t t-jquery=".text-center.o_web_settings_dashboard_share" t-operation="replace">
+            <div class="text-center o_web_settings_dashboard_share">
+                <img src="/web_extend_db_manager_layout/static/src/img/litbang.png" />
+                <div class="text-center">
+                    <div class="user-heading">
+                        <h3>
+                            <t t-esc="server_version"/>
+                        </h3>
+                    </div>
+                    <div>
+                        <div class="tab-content">
+                            <div role="tabpanel" id="settings" class="tab-pane active text-muted text-center o_web_settings_dashboard_compact_subtitle">
+                                <small>Copyright ©  <a target="_blank" style="text-decoration: underline;">Puslitbang Polri</a> <a target="_blank" style="text-decoration: underline;">GNU LGPL Licensed</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <a t-if="debug != true" class="oe_activate_debug_mode float-right" href="?debug" >Activate the developer mode</a>
+                <br t-if="debug != true"/>
+                <a t-if="debug != 'assets'" class="oe_activate_debug_mode float-right" href="?debug=assets" >Activate the developer mode (with assets)</a>
+                <br t-if="debug != 'assets'"/>
+                <a t-if="debug != false" class="oe_activate_debug_mode float-right" href="/web" >Deactivate the developer mode</a>
+                <br t-if="debug != false"/>
+                <a t-if="(debug) and !(demo_active)" class="oe_activate_debug_mode float-right o_web_settings_dashboard_force_demo" href="#">Load demo data</a>
+            </div>
+        </t>    
+    </t>    
+</templates>

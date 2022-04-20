@@ -1,0 +1,119 @@
+<odoo>
+    <data>
+        <record id="surat_keluar_view_form_id_inherit" model="ir.ui.view">
+            <field name="name">surat_keluar_view_form_id</field>
+            <field name="model">surat_keluar</field>
+            <field name="inherit_id" ref="tnde.surat_keluar_view_form_id"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='jenis_surat']" position="after">
+					<field name="pengajuan_id" string="Berdasar Surat No." attrs="{'invisible': [('pengajuan_id','=',False)]}"/>
+				</xpath>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengajuan_tree" model="ir.ui.view">
+            <field name="name">view_pdu_pengajuan_tree</field>
+            <field name="model">pdu.pengajuan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengajuan_form" model="ir.ui.view">
+            <field name="name">view_pdu_pengajuan_form</field>
+            <field name="model">pdu.pengajuan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="create_sprin" string="Buat Surat Perintah" type="object" states="draft,Disposisi" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_undangan" string="Buat Surat Undangan" type="object" states="Surat Perintah" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_pinjam" string="Buat Surat Fasilitas" type="object" states="Surat Undangan" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_ujian" string="Lakukan Pengujian" type="object" states="Surat Pinjam Fasilitas" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_berita" string="Buat Berita Acara" type="object" states="Pengujian" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_laporan" string="Doc. Laporan" type="object" states="Berita Acara" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_sertifikat" string="Cetak Sertifikat" type="object" states="Laporan Uji" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_pemberitahuan" string="Buat Surat Pemberitahuan" type="object" states="sertifikat" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="create_nota" string="Buat Nota Dinas" type="object" states="pemberitahuan" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <button name="selesai" string="Selesai" type="object" states="Nota Dinas" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="Surat Perintah,Surat Undangan,Pengujian,sertifikat,Nota Dinas,selesai"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="ref" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
+                                <field name="partner_id" attrs="{'readonly': [('state', 'not in', ('draft'))]}" context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}" domain="[('supplier','=',True)]"/>
+                                <field name="create_uid" string="Nama Pengaju" attrs="{'invisible': [('state', 'in', ('draft'))], 'readonly': [('state', 'not in', ('draft'))]}"/>
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Material">
+                                <field name="product_ids" attrs="{'readonly': [('state', 'not in', ('draft'))]}" domain="[('vendor_id', '=', partner_id)]">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="merk"/>
+                                        <field name="type"/>
+                                        <field name="country"/>
+                                        <field name="categ_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Dokumen Surat">
+                                <field name="surat_ids" readonly="1"/>
+                            </page>
+                            <page string="Pengujian">
+                                <field name="ujian_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengajuan_calendar" model="ir.ui.view">
+            <field name="name">view_pdu_pengajuan_calendar</field>
+            <field name="model">pdu.pengajuan</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar" date_start="date" display="[name]" mode="month" color="create_uid">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengajuan_graph" model="ir.ui.view">
+            <field name="name">view_pdu_pengajuan_graph</field>
+            <field name="model">pdu.pengajuan</field>
+            <field name="arch" type="xml">
+                <graph string="Graph" type="pie">
+                    <field name="partner_id" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengajuan_pivot" model="ir.ui.view">
+            <field name="name">view_pdu_pengajuan_pivot</field>
+            <field name="model">pdu.pengajuan</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot">
+                </pivot>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="survey_form_inherit">
+		    <field name="name">Survey Inherit</field>           
+		    <field name="model">survey.survey</field>                                  
+		    <field name="inherit_id" ref="survey.survey_form"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="//header" position="inside">
+					<button string="Get Short Link" name="get_short_link" type="object" class="oe_highlight"/>
+				</xpath>
+				<xpath expr="//notebook" position="before">
+					<group>
+						<field name="short_link" widget="url"/>
+					</group>
+			   </xpath>
+			</field>
+		</record>
+    </data>
+</odoo>

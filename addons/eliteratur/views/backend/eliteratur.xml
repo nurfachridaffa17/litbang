@@ -1,0 +1,104 @@
+<odoo>
+	<data>
+		<!--  ________ eliteratur view form _______-->
+		<record model="ir.ui.view" id="eliteratur_view_form_id">
+			<field name="name">surat keluar form</field>
+			<field name="model">eliteratur</field>
+			<field name="arch" type="xml">
+				<form string="eliteratur Form">
+				<sheet>
+					<field name="image" widget="image" class="oe_avatar"/>
+
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Judul E-Literatur" />
+						<h2>
+							<field name="name"/> 
+						</h2>
+					</div>
+
+					<group>
+						<group>
+							<field name="topic_id" options="{'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+							<field name="url_file" />
+							<field name="author" />
+							<field name="edisi" />
+							<field name="no_panggil" />
+							<field name="isbn_issn" />
+						</group>
+						<group>
+							<field name="klasifikasi" />
+							<field name="judul_seri" />
+							<field name="bahasa_id" options="{'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+							<field name="penerbit" />
+							<field name="tahun_terbit" />
+							<field name="tempat_terbit_id" options="{'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+						</group>
+					</group>
+					<group >				
+						<field name="deskripsi" cols="20" rows="10"/>
+					</group>
+					
+				</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<!--  ________ eliteratur view tree _______-->
+	<record model="ir.ui.view" id="eliteratur_view_tree_id">
+	    <field name="name">eliteratur.list</field>
+	    <field name="model">eliteratur</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="E-literatur List">
+   			 	<field name="name"/>
+   			 	<field name="topic_id"/>
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<!--  ________ eliteratur view search _______-->
+	<record model="ir.ui.view" id="eliteratur_view_search_id">
+	    <field name="name">eliteratur.search</field>
+	    <field name="model">eliteratur</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (search) -->
+			<search>
+    			<field name="name"/> 
+    			<field name="topic_id"/> 
+    			<group>
+                    <filter name="group_topic_id" context="{'group_by':'topic_id'}" domain="[]" string="Topic"/>
+				</group>
+		</search>
+	    </field> <!-- end arch -->
+	</record>
+
+
+		<!--  ________ kategori view tree _______-->
+	<record model="ir.ui.view" id="kategori_view_tree_id">
+	    <field name="name">kategori.list</field>
+	    <field name="model">eliteratur.kategori</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="Kategori" editable="bottom">
+   			 	<field name="name"/>
+   			 	<field name="active"/>
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<!--  ________ kategori view search _______-->
+	<record model="ir.ui.view" id="kategori_view_search_id">
+	    <field name="name">kategori.search</field>
+	    <field name="model">eliteratur.kategori</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (search) -->
+			<search>
+    			<field name="name"/> 
+			</search>
+	    </field> <!-- end arch -->
+	</record>
+
+
+	</data>
+</odoo>

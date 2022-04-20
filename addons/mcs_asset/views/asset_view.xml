@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <!-- Top menu item -->
+        <menuitem name="Aset"
+            id="base.menu_mro_root"
+            sequence="80"
+            groups="mcs_asset.group_asset_manager"/>
+
+        <!-- Asset menu -->
+        <menuitem name="Aset"
+            id="menu_maintenance_assets"
+            parent="base.menu_mro_root"
+            sequence="9"/>
+
+           
+        <!-- Rincian Asset Tree View  -->
+        <record id="rincian_assets_tree_view" model="ir.ui.view">
+            <field name="name">asset.detail.tree</field>
+            <field name="model">asset.detail</field>
+            <field name="arch" type="xml">
+                <tree string="Rincian Assets">
+                    <field name="aset_id"/>
+                    <field name="model"/>
+                    <field name="tgl_perolehan"/>
+                    <field name="nopol"/>
+                    <field name="pemegang"/>
+                    <field name="no_mesin"/>
+                    <field name="serial"/>
+                     <field name="maintenance_state_id"/>
+                </tree>
+            </field>
+        </record>       
+
+  		<record id="rincian_assets_form_view" model="ir.ui.view">
+            <field name="name">asset.detail.form</field>
+            <field name="model">asset.detail</field>
+            <field name="arch" type="xml">
+                <form string="Assets">
+                    <sheet>
+						<group col="4">
+							<field name="aset_id" required='1'/>
+              				<field name="model" />
+              				<field name="tgl_perolehan"/>
+              				<field name="nopol"/>
+              				<field name="pemegang"/>
+              				<field name="no_mesin"/>
+              				<field name="serial"/>
+              				<field name="maintenance_state_id" string="Status" widget="selection"/>
+       					</group>
+                     </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Asset Search  -->
+        <record model="ir.ui.view" id="assets_search">
+            <field name="name">Asset Search</field>
+            <field name="model">asset.detail</field>
+            <field name="arch" type="xml">
+                <search string="Asset Search">
+                    <field name="model"/>
+                    <field name="aset_id"/>
+                    <field name="tgl_perolehan"/>
+                    <field name="nopol"/>
+                    <field name="no_mesin"/>
+                    <separator />
+                    <group expand="0" string="Group By">
+                        <filter name="group_category"
+                              string="Kategori"
+                              context="{'group_by': 'aset_id'}"
+                              />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="rincian_action_assets" model="ir.actions.act_window">
+            <field name="name">Rincian Aset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+       
+        <!-- Asset Tree View  -->
+        <record id="assets_tree_view" model="ir.ui.view">
+            <field name="name">asset.asset.tree</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <tree string="Assets">
+                    <field name="name"/>
+                    <field name="asset_number"/>
+                    <field name="category_ids"/>
+                    <field name="qty" sum="Total Kuantitas"/>
+                    <field name="uom"/>
+                    <field name="nilai" sum="Total Nilai"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Asset Form View  -->
+        <record id="assets_form_view" model="ir.ui.view">
+            <field name="name">asset.asset.form</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <form string="Assets">
+                    <header>
+                        <field name="maintenance_state_id" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
+                        </div>
+                        <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <field name="jenis" placeholder="Jenis"/>
+                        </div>
+                        <group col="4">
+                        	<field name="category_ids"/>
+                        	<field name="asset_number"/>
+                            <field name="property_stock_asset"/>
+                            <field name="qty"/>
+                            <field name="uom"/>
+                            <field name="nilai"/>                            
+                        </group>
+                        <group col="4">
+                             <field name="vendor_id"/>
+                             
+                             <field name="active"/>
+                        </group>
+                        <notebook>
+                         <page name="detail" string="Rincian Asset">                         		
+                         		<field name="asset_detail_ids">
+                         			<tree editable="bottom">
+                                        <field name="nup" />
+                         				<field name="model" />
+                         				<field name="tgl_perolehan"/>
+                         				<field name="nopol"/>
+                         				<field name="pemegang"/>
+                         				<field name="no_mesin"/>
+                                        <field name="serial"/>
+                                        <field name="harga_perolehan"/>
+                         				<field name="sumber_dana"/>
+                         				<field name="maintenance_state_id" widget="selection"/>
+                         			</tree>
+                                </field>
+                            </page>
+                            <page name="info" string="Catatan">
+                                <group>
+									<field name="note"/>
+                                </group>
+                            </page>
+                         </notebook>
+                     </sheet>
+                     <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Asset Kanban View  -->
+        <record model="ir.ui.view" id="assets_kanban_view">
+            <field name="name">Asset Kanban</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="maintenance_state_id"/>
+                    <field name="maintenance_state_color"/>
+                    <field name="user_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette">
+                                <div class="codup_kanban_left">
+                                    <a type="open"><img t-att-src="kanban_image('asset.asset', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                                    <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                    	<li t-if="record.asset_number.raw_value">No Aset : <field name="asset_number"/></li>
+                                    	<li t-if="record.qty.raw_value">Kuantitas :	<field name="qty"/></li>
+                                    	<li t-if="record.nilai.raw_value">Nilai :	<field name="nilai"/></li>
+                                        <li class="codup_kanban_info">
+                                        <img  t-if="record.user_id.raw_value" t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <!-- Asset Search  -->
+        <record model="ir.ui.view" id="assets_search">
+            <field name="name">Asset Search</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <search string="Asset Search">
+                    <field name="asset_number"/>
+                    <field name="name"/>
+                    <field name="property_stock_asset"/>
+                    <field name="user_id"/>
+                    <field name="category_ids"/>
+                    <separator />
+                    <group expand="0" string="Group By">
+                        <filter name="group_category"
+                              string="Kategori"
+                              context="{'group_by': 'category_ids'}"
+                              />
+                     <filter name="group_loation"
+                              string="Lokasi"
+                              context="{'group_by': 'property_stock_asset'}"
+                              />                              
+                      <filter name="group_user"
+                              string="Penanggung Jawab"
+                              context="{'group_by': 'user_id'}"
+                              />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_assets" model="ir.actions.act_window">
+            <field name="name">Aset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.asset</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_kanban_view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="assets_kanban_view"/>
+            <field name="act_window_id" ref="action_assets"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_tree_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="assets_tree_view"/>
+            <field name="act_window_id" ref="action_assets"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_form_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="assets_form_view"/>
+            <field name="act_window_id" ref="action_assets"/>
+        </record>
+
+        <!-- Asset item -->
+        <menuitem name="Aset"
+            action="action_assets"
+            id="menu_maintenance_assets_assets"
+            parent="menu_maintenance_assets"
+            sequence="10"/>
+
+         <menuitem name="  > Rincian Asset"
+            action="rincian_action_assets"
+            id="menu_rincian_action_assets"
+            parent="menu_maintenance_assets"
+            groups="mcs_asset.group_asset_manager"
+            sequence="20"/>   
+            
+        <!-- Management Asset Kanban View  -->
+        <record model="ir.ui.view" id="management_assets_kanban_view">
+            <field name="name">Manage states Asset Kanban</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="maintenance_state_id" create="false" delete="false">
+                    <field name="maintenance_state_id"/>
+                    <field name="maintenance_state_color"/>
+                    <field name="user_id"/>
+                    <field name="property_stock_asset"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card codup_kanban_status oe_kanban_global_click">
+                                <div class="codup_kanban_left">
+                                    <a type="open"><img t-att-src="kanban_image('asset.asset', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                                    <div t-attf-title="#{record.maintenance_state_id.value}" t-attf-class="codup_status_color_#{record.maintenance_state_color.raw_value} codup_status"></div>
+                                </div>
+                                <div class="codup_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                    	<li title="Lokasi"><field name="property_stock_asset"/></li>
+                                        <li class="codup_kanban_info">
+                                        <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_management_assets" model="ir.actions.act_window">
+            <field name="name">Status Asset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.asset</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_management_assets_kanban_view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="management_assets_kanban_view"/>
+            <field name="act_window_id" ref="action_management_assets"/>
+        </record>
+
+        <!-- Management Asset item -->
+        <menuitem name="Kelola Status Asset"
+            action="action_management_assets"
+            id="menu_maintenance_assets_management"
+            parent="menu_maintenance_assets"
+            groups="mcs_asset.group_asset_manager"
+            sequence="100"/>
+
+        <!-- Report menu -->
+        <menuitem name="Laporan"
+            id="menu_maintenance_report"
+            parent="base.menu_mro_root"
+            sequence="30"/>
+
+        <!-- Configuration menu -->
+        <menuitem name="Pengaturan"
+            id="menu_maintenance_config"
+            parent="base.menu_mro_root"
+            groups="mcs_asset.group_asset_manager"
+            sequence="200"/>
+            
+        <!-- Asset State Form View  -->        
+        <record id="asset_state_form_view" model="ir.ui.view">
+            <field name="name">asset.state.form</field>
+            <field name="model">asset.state</field>
+            <field name="arch" type="xml">
+                <form string="State" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="state_color"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Asset State Kanban View  -->
+        <record model="ir.ui.view" id="asset_state_kanban_view">
+            <field name="name">Asset State Kanban</field>
+            <field name="model">asset.state</field>
+            <field name="arch" type="xml">
+                <kanban >
+                    <field name="name"/>
+                    <field name="state_color"/>
+                    <field name="sequence" widget="handle"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card codup_kanban_status oe_kanban_global_click">
+                                <h4>
+                                <a name="change_color" string="Change color" type="object"><span t-attf-class="codup_status_color_#{record.state_color.raw_value} codup_status"></span></a>
+                                <field name="name"/>
+                                </h4>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_asset_state" model="ir.actions.act_window">
+            <field name="name">Status Aset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.state</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+        <!-- Asset state item -->
+        <menuitem name="Status Aset"
+            action="action_asset_state"
+            id="menu_asset_state"
+            parent="menu_maintenance_config"
+            groups="mcs_asset.group_asset_manager"
+            sequence="100"/>
+
+        <!-- Asset Tags Tree View -->
+        <record id="asset_category_tree_view" model="ir.ui.view">
+            <field name="name">asset.category.tree</field>
+            <field name="model">asset.category</field>
+            <field name="arch" type="xml">
+                <tree string="Asset Tags" editable="top">
+                	<field name="code"/>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_asset_category" model="ir.actions.act_window">
+            <field name="name">Kategori Aset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <!-- Asset Tags item -->
+        <menuitem name="Kategori Aset"
+            action="action_asset_category"
+            id="menu_asset_category"
+            parent="menu_maintenance_config"
+            sequence="100"/>
+
+
+        <record id="bt_asset_management_asset_location_tree" model="ir.ui.view">
+            <field name="name">bt.asset.location.tree</field>
+            <field name="model">bt.asset.location</field>
+            <field name="arch" type="xml">
+                <tree string="Asset Location">
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="bt_asset_management_asset_location_search" model="ir.ui.view">
+            <field name="name">bt.asset.location.search</field>
+            <field name="model">bt.asset.location</field>
+            <field name="arch" type="xml">
+                <search string="Asset Location">
+                	<field name="name"/>
+                	<field name="asset_ids"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="bt_asset_management_asset_location_form" model="ir.ui.view">
+            <field name="name">bt.asset.location.form</field>
+            <field name="model">bt.asset.location</field>
+            <field name="arch" type="xml">
+                <form string="Asset Location">
+                	<sheet>
+				    	<div class="oe_title">
+                        	<div class="oe_edit_only">
+                            	<label for="name" string="Location Name"/>
+                            </div>
+                            <h1>
+                            	<field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                       		<field name="default_scrap"/>
+                        </group>
+                        <group>
+                        	<notebook>
+                        		<page string="Assets">
+                        			<field name="asset_ids" nolabel="1" colspan="4" readonly="1">
+                        				<tree string="" editable="bottom">
+                        					<field name="name"/>
+                							<field name="asset_number"/>	
+                        				</tree>
+                        				<form string="Asset Details">
+                        					<sheet>
+                        						<group>
+                        							<field name="name"/>
+                									<field name="asset_number"/>
+                        						</group>
+                        					</sheet>	
+                        				</form>
+                        			</field>
+                        		</page>
+                        	</notebook>
+                        </group>	
+                	</sheet>	
+                </form>
+            </field>
+        </record>
+        
+	    <record id="action_bt_asset_location" model="ir.actions.act_window">
+	            <field name="name">Lokasi Aset</field>
+	            <field name="type">ir.actions.act_window</field>
+	            <field name="res_model">bt.asset.location</field>
+	            <field name="view_type">form</field>
+	            <field name="view_mode">tree,form</field>
+	            <field name="search_view_id" ref="bt_asset_management_asset_location_search"/>
+	            <field name="help" type="html">
+	                <p class="oe_view_nocontent_create">
+	                    Create Asset Location for the Company
+	                </p>
+	            </field>
+	        </record>
+        
+	   <menuitem action="action_bt_asset_location" name="Lokasi Aset"
+	            id="menu_action_bt_asset_location" parent="menu_maintenance_config"
+	            sequence="13"/> 
+        
+ 	</data>
+</openerp>

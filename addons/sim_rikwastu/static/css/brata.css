@@ -1,0 +1,8 @@
+.o_control_panel .o_cp_sidebar .o_hidden_input_file input.o_form_input_file {
+    opacity: 1.2 !important;
+   
+}
+
+.dropdown-menu {
+    min-width: 178px !important;
+}

@@ -1,0 +1,63 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="tahapperencanaan_view_form_id">
+			<field name="name">tahap perencanaan Surat form</field>
+			<field name="model">tahapperencanaan</field>
+			<field name="arch" type="xml">
+				<form string="tahapperencanaan Form">
+					<header>
+						<button name="approve" type="object" string="Selesai" states="Proses" class="oe_highlight"/> 
+						<field name="state" widget="statusbar" statusbar_visible="Proses, Selesai"/> 
+					</header>
+				<sheet>
+					<group> 
+						<field name="name"/> 
+						<field name="program"/> 
+						<field name="step"/> 
+						<field name="kepada"/> 
+						<field name="jenis_surat" options="{'no_create':true}"/>
+						<field name="scan_surat" filename="lampiran" />
+						<field name="lampiran" invisible="1" />
+					</group>
+					<group >				
+						<field name="keterangan" attrs="{'readonly':[('state', '=', 'Selesai')]}" widget="html" nolabel="1" cols="20" height="710"/>
+					</group>
+				</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<!--  ________ berita view tree _______-->
+	<record model="ir.ui.view" id="tahapperencanaan_view_tree_id">
+	    <field name="name">tahapperencanaan.list</field>
+	    <field name="model">tahapperencanaan</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="tahapperencanaan list"> 
+						<field name="name"/> 
+				<field name="program" />
+				<field name="kepada" />
+				<field name="jenis_surat" />
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	<!--  ________ tahapperencanaan_lihat view tree _______-->
+	<record model="ir.ui.view" id="tahapperencanaan_lihat_view_tree_id">
+	    <field name="name">tahapperencanaan_lihat.list</field>
+	    <field name="model">tahapperencanaan</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="tahapperencanaan_lihat list"> 
+						<field name="name"/> 
+				<field name="program" />
+				<field name="kepada" />
+				<field name="jenis_surat" />
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	
+	</data>
+</odoo>

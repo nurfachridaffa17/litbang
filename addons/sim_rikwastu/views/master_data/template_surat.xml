@@ -1,0 +1,45 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="template_view_form_id">
+			<field name="name">Template Surat form</field>
+			<field name="model">template</field>
+			<field name="arch" type="xml">
+				<form string="template Form">
+					<header>
+						
+					</header>
+				<sheet>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Nama Template Surat" />
+						<h2>
+							<field name="name"/> 
+						</h2>
+					</div>
+					<group> 
+						<field name="kode_surat" />
+						<field name="template" />
+						<field name="format_nomor" />
+					</group>
+				</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<!--  ________ berita view tree _______-->
+	<record model="ir.ui.view" id="template_view_tree_id">
+	    <field name="name">template.list</field>
+	    <field name="model">template</field>
+	    <field name="arch" type="xml">
+	    <!-- Konten: tp_arch_*_component (tree) -->
+			<tree string="template list"> 
+				<field name="name"/>
+				<field name="kode_surat" />
+				<field name="format_nomor" />
+			</tree>
+	    </field> <!-- end arch -->
+	</record>
+	
+	
+	</data>
+</odoo>

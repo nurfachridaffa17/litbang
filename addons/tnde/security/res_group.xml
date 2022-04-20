@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+
+		<record id="group_surat_masuk" model="ir.module.category">
+			<field name="name">TNDE Surat Masuk</field>
+		</record>
+
+		<record model="res.groups" id="surat_masuk_user"> 
+		    <field name="category_id" ref="tnde.group_surat_masuk" /> 
+		    <field name="name">Akses Surat Masuk</field> 
+		</record>
+
+
+		<record model="res.groups" id="pimpinan_kateg"> 
+		    <field name="category_id" ref="tnde.group_surat_masuk" /> 
+		    <field name="name">Pimpinan</field> 
+		</record>
+
+		<record model="res.groups" id="akses_tnde_tu"> 
+		    <field name="category_id" ref="tnde.group_surat_masuk" /> 
+		    <field name="name">Akses TU</field> 
+		</record>
+		
+		<record model="res.groups" id="disposisi_akses">
+			<field name="category_id" ref="tnde.group_surat_masuk" />
+			<field name="name">Akses Disposisi </field>
+		</record>
+
+
+
+
+		
+		<record id="group_surat_keluar" model="ir.module.category">
+			<field name="name">TNDE Surat Keluar</field>
+		</record>
+		
+		<record model="res.groups" id="akses_tnde_surat_keluar">
+			<field name="category_id" ref="tnde.group_surat_keluar" />
+			<field name="name">Akses Surat Keluar</field>
+		</record>
+
+		<record model="res.groups" id="pimpinan_kateg2"> 
+		    <field name="category_id" ref="tnde.group_surat_keluar" /> 
+		    <field name="name">Pimpinan</field> 
+		</record>
+
+
+		<record model="res.groups" id="sespus"> 
+		    <field name="category_id" ref="tnde.group_surat_keluar" /> 
+		    <field name="name">Sespus</field> 
+		</record>
+
+		<record model="res.groups" id="konseptor"> 
+		    <field name="category_id" ref="tnde.group_surat_keluar" /> 
+		    <field name="name">Konseptor</field> 
+		</record>
+
+		<record model="res.groups" id="kode_tersier"> 
+		    <field name="category_id" ref="tnde.group_surat_keluar" /> 
+		    <field name="name">Kode Tersier</field> 
+		</record>
+
+
+
+
+
+		<record id="group_surat_Internal" model="ir.module.category">
+			<field name="name">TNDE Surat Internal</field>
+		</record>
+
+		<record model="res.groups" id="arsip_surat"> 
+		    <field name="category_id" ref="tnde.group_surat_Internal" /> 
+		    <field name="name">User</field> 
+		</record>
+	</data>
+</odoo>

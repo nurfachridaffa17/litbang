@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <record id="view_pdu_pengujian_tree" model="ir.ui.view">
+            <field name="name">view_pdu_pengujian_tree</field>
+            <field name="model">pdu.pengujian</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="date"/>
+                    <field name="nilai_akhir"/>
+                    <field name="status_ujian"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengujian_form" model="ir.ui.view">
+            <field name="name">view_pdu_pengujian_form</field>
+            <field name="model">pdu.pengujian</field>
+            <field name="arch" type="xml">
+                <form create="0">
+                    <header>
+                        <button name="selesai" string="Selesai" type="object" states="draft" class="btn-primary" groups="mcs_pdu.group_pdu_office,mcs_pdu.group_pdu_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_id" attrs="{'readonly': [('state', 'in', ('process','done'))]}"
+                                options="{'no_create': True, 'no_open': True}"/>
+                                <field name="ketua" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                                <field name="no_surat" string="Merujuk Surat No." readonly="1"/>
+                                <field name="alat_uji" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                                <field name="tempat" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Penilaian">
+                                <group>
+                                    <div>
+                                        <label for="nilai_bkp" string="Nilai Bidang Konstruksi dan Perlengkapan" style="font-weight:bold; width:60% !important"/>
+                                        <field name="nilai_bkp" attrs="{'readonly': [('state', 'in', ('process','done'))]}" nolabel="1" style="width:20% !important"/>
+                                    </div>
+                                    <div>
+                                        <label for="nilai_bk" string="Nilai Bidang Kemampuan" style="font-weight:bold; width:60% !important"/>
+                                        <field name="nilai_bk" attrs="{'readonly': [('state', 'in', ('process','done'))]}" nolabel="1" style="width:20% !important"/>
+                                    </div>
+                                    <div>
+                                        <label for="nilai_bkk" string="Nilai Bidang Kelancaran Kerja" style="font-weight:bold; width:60% !important"/>
+                                        <field name="nilai_bkk" attrs="{'readonly': [('state', 'in', ('process','done'))]}" nolabel="1" style="width:20% !important"/>
+                                    </div>
+                                    <div>
+                                        <label for="nilai_akhir" string="Nilai Akhir" style="font-weight:bold; width:60% !important"/>
+                                        <field name="nilai_akhir" attrs="{'readonly': [('state', 'in', ('process','done'))]}" nolabel="1" style="width:20% !important"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="status_ujian" attrs="{'readonly': [('state', 'in', ('process','done'))]}" widget="radio"/>
+                                    <field name="notes" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                                    <field name="attach_file" filename="attach_name" attrs="{'readonly': [('state', 'in', ('process','done'))]}"/>
+                                    <field name="attach_name" invisible="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pdu_pengujian_calendar" model="ir.ui.view">
+            <field name="name">view_pdu_pengujian_calendar</field>
+            <field name="model">pdu.pengujian</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar" date_start="date" display="[name]" mode="month" color="create_uid">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+    </data>
+</odoo>

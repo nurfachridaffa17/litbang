@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="act_eliteratur" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name">Data E-Literatur</field>
+			<field name="res_model">eliteratur</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_group_topic_id': 1}</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Belum Ada Data</p>
+			</field>
+		</record>
+
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="act_kategori" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name">Kategori</field>
+			<field name="res_model">eliteratur.kategori</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Belum Ada Data</p>
+			</field>
+		</record>
+		
+		<!-- __Menu-Top__ -->
+		<menuitem name="E-Literatur" id="menu_induk" web_icon="eliteratur,static/description/icon.png"/>
+		<menuitem name="Data E-Literatur" parent="menu_induk" id="menu_eliteratur" action="act_eliteratur" sequence="10"/>
+		<menuitem name="Kategori" parent="menu_induk" id="menu_kategori" action="act_kategori" sequence="20"/>
+
+
+
+
+
+		<!-- __Menu & View E-Literatur Web__ -->
+	<record id="dashboard_iframe_eliteratur_form_view" model="ir.ui.view">
+      <field name="name">Dashboard iFrame</field>
+      <field name="model">mcs.dashboard.iframe</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Embedded Webpage" create="false" edit="false" delete="false">
+          <center>
+            <iframe src="/eliteratur" marginwidth="0" marginheight="0" frameborder="no"  style="height:1000px; width: 100%; border-width:0px;"/>
+          </center>
+        </form>
+      </field>
+    </record>
+
+
+  <record id="action_dashboard_iframe_eliteratur" model="ir.actions.act_window">
+      <field name="name">E-Literatur</field>
+      <field name="res_model">mcs.dashboard.iframe</field>
+      <field name="view_mode">form,tree</field>
+      <field name="target">inline</field>
+      <field name="view_id" ref="eliteratur.dashboard_iframe_eliteratur_form_view"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+        Click to add
+        </p>
+        <p>klik tombol create untuk membuat data baru</p>
+      </field>
+    </record>
+
+
+    <menuitem id="menu_eliteratur_web" action="eliteratur.action_dashboard_iframe_eliteratur" parent="eliteratur.menu_induk" name="Lihat Web" sequence="30"/>
+	
+
+
+
+	</data>
+</odoo>

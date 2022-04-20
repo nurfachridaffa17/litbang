@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!--  ________ pengaturan_disposisi view tree _______-->
+		<record model="ir.ui.view" id="pengaturan_disposisi_view_tree_id">
+		    <field name="name">pengaturan disposisi list</field>
+		    <field name="model">pengaturan_disposisi</field>
+		    <field name="arch" type="xml">
+		    <!-- Konten: tp_arch_*_component (tree) -->
+				<tree string="pengaturan_disposisi list">
+				    <field name="name"/>
+	    			<field name="ket"/>
+				</tree>
+		    </field> <!-- end arch -->
+		</record>
+		
+			    
+		<record model="ir.ui.view" id="pengaturan_disposisi_view_form_id">
+			<field name="name">pengaturan_disposisi.form</field>
+			<field name="model">pengaturan_disposisi</field>
+			<field name="arch" type="xml">
+				<form string="pengaturan_disposisi Form">
+					<header>
+						<!-- Tambah Surat Masuk -->
+					</header>
+				<sheet>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Nama Disposisi" />
+						<h2>
+							<field name="name" />
+						</h2>
+					</div>
+					<group>
+						<field name="ket" />
+					</group>
+				</sheet>
+				</form>
+			</field>
+		</record>
+	
+	
+		<record model="ir.ui.view" id="pengaturan_disposisi_view_search_id">
+			<field name="name">pengaturan_disposisi.search</field>
+			<field name="model">pengaturan_disposisi</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (search) -->
+				<search>
+					<field name="name" />
+					<field name="ket" />
+				</search>
+			</field> <!-- end arch -->
+		</record>
+	</data>
+</odoo>

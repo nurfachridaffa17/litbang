@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ################################################## Create Date/Time: 
+	Aug 6, 2018/2:07:45 PM Author: Matrica-User ################################################## -->
+
+<odoo>
+	<data>
+		<!-- ________ perencanaan_tahunan view form _______ -->
+		<record model="ir.ui.view" id="perencanaan_tahunan_view_form_id">
+			<field name="name">perencanaan_tahunan.form</field>
+			<field name="model">rikwastu.perencanaan_tahunan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (form) -->
+				<form string="perencanaan_tahunan Form">
+					<header>
+						<!-- tp_button_workflow_db, tp_button_workflow_engine disini -->
+						<!-- tp_button_smart_button disini -->
+						<button name="action_done" type="object" string="Lanjut"
+							class="oe_highlight" />
+
+						<field name="stage_id" widget="statusbar"
+							domain="[('step_id.name','=','Perencanaan')]" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" string="Judul" />
+							<h1>
+								<field name="name" />
+							</h1>
+						</div>
+
+						<group>
+							<!-- Blok Grup Utama, terdiri dari beberapa grup didalamnya -->
+							<group colspan="4" col='4'>
+								<!-- Grup Kiri atau Grup Atas kalau di handphone -->
+								<group string="Personil" colspan="2" col="2">
+									<!-- field-field grup kiri disini -->
+									<!-- field lainnya disini -->
+									<field name="personil_internal_ids" widget="many2many_tags" />
+									<field name="personil_eksternal_ids" widget="many2many_tags" />
+								</group>
+								<!-- Grup Kanan atau Grup Bawah kalau di handphone -->
+								<group string="Durasi" colspan="2" col="2">
+									<!-- field-field grup kiri disini -->
+									<field name="lama_durasi" />
+									<field name="satuan_durasi" />
+									<field name="thn" readonly="1"/>
+								</group>
+							</group>
+
+						</group>
+
+						<notebook colspan="2">
+							<!-- batas tab 1 Pelaksanaan -->
+							<page string="Timeline Pelaksanaan">
+
+								<field name="pelaksanaan_ids"
+									context="{'default_tim_internal_ids':personil_internal_ids,
+							    										 'default_tim_eksternal_ids':personil_eksternal_ids,
+							    										  'default_name':name,
+							    										  'default_thn':thn,}">
+									<tree string="kolom-kolom">
+										<field name="name" />
+										<field name="prov_id" />
+										<field name="kota_id" />
+										<field name="langkah_kerja_ids" />
+										<field name="tim_internal_ids" />
+										<field name="tim_eksternal_ids" />
+										<field name="lap_sementara" widget="binary" filename="file_name" />
+										<field name="file_name" invisible="1" />
+									</tree>
+								</field>
+
+							</page>
+							<!-- batas tab 2 Deskripsi -->
+							<page string="Deskripsi">
+								<field name="deskripsi" />
+							</page>
+							<page string="Tahapan Perencanaan">
+								<field name="perencanaan_ids" readonly="1">
+									<tree string="Perencanaan">
+										<field name="step" />
+										<field name="name" />
+										<field name="kepada" />
+										<field name="jenis_surat" />
+										<field name="state" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"
+							groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- ________ perencanaan_tahunan view tree _______ -->
+		<record model="ir.ui.view" id="perencanaan_tahunan_view_tree_id">
+			<field name="name">perencanaan_tahunan.list</field>
+			<field name="model">rikwastu.perencanaan_tahunan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (tree) -->
+				<tree string="perencanaan_tahunan list" create="false">
+					<field name="name" />
+					<field name="deskripsi" />
+					<button name="create_berkas" type="object" string="Buat Berkas" />
+				</tree>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- ________ perencanaan_tahunan view search _______ -->
+		<record model="ir.ui.view" id="perencanaan_tahunan_view_search_id">
+			<field name="name">perencanaan_tahunan.search</field>
+			<field name="model">rikwastu.perencanaan_tahunan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (search) -->
+				<search>
+					<field name="name" />
+					<field name="deskripsi" />
+				</search>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- __________ perencanaan_tahunan view kanban __________ -->
+		<record model="ir.ui.view" id="perencanaan_tahunan_view_kanban_id">
+			<field name="name">perencanaan_tahunan.kanban</field>
+			<field name="model">rikwastu.perencanaan_tahunan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (search,tree,graph,calendar,kanban,pivot,gantt -->
+				<!-- ____Kanban Arc & field-field___ -->
+				<kanban default_group_by="stage_id" create="false">
+					<!-- Fields to use in expressions... -->
+					<field name="stage_id" />
+					<field name="color" />
+					<field name="state" />
+					<field name="priority" />
+					<field name="name" />
+					<!-- Uncomment script di bawah untuk follower (1/2) field follower -->
+					<field name="personil_internal_ids" />
+					<field name="personil_eksternal_ids" />
+
+					<!-- _____Kanban template mulai disini_____ -->
+					<templates>
+						<!-- Uncomment script di bawah untuk follower (2/3) avatar init -->
+						<t t-name="personil_internal">
+							<div>
+								<t t-foreach="record.personil_internal_ids.raw_value.slice(0, arg_max)"
+									t-as="rec">
+									<img
+										t-att-src="kanban_image(
+			             'hr.employee', 'image_small', rec)"
+										class="oe_avatar" width="24" height="24" />
+								</t>
+							</div>
+						</t>
+						<t t-name="personil_eksternal">
+							<div>
+								<t t-foreach="record.personil_eksternal_ids.raw_value.slice(0, arg_max)"
+									t-as="rec">
+									<img
+										t-att-src="kanban_image(
+			             'res.partner', 'image_small', rec)"
+										class="oe_avatar" width="24" height="24" />
+								</t>
+							</div>
+						</t>
+
+						<!-- __Kanban-box template__ -->
+						<t t-name="kanban-box">
+							<!-- Set the Kanban Card color: -->
+							<div
+								t-attf-class="#{kanban_color(record.color.raw_value)}
+		                         oe_kanban_global_click">
+								<!-- __Drop down menu__ -->
+								<div class="o_dropdown_kanban dropdown">
+									<!-- Top-right drop down menu here... -->
+									<a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+										<span class="fa fa-bars fa-lg" />
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+										<li>
+											<ul class="oe_kanban_colorpicker" data-field="color" />
+										</li>
+									</ul>
+								</div> <!-- end dropdown menu -->
+
+								<!-- Content elements and fields go here... -->
+								<div class="oe_kanban_content">
+									<div>
+										<strong>
+											<a type="open">
+												<field name="name" />
+											</a>
+										</strong>
+									</div>
+									<ul>
+										<li t-att-class="red_or_black">
+											<field name="lama_durasi" />
+											<field name="satuan_durasi" />
+										</li>
+
+									</ul>
+
+									<div class="oe_kanban_footer">
+										<!-- Left hand footer... -->
+
+										<!-- Right hand footer... -->
+
+										<div>
+											Personil Internal
+											<!-- Uncomment script di bawah untuk follower (3/3) avatar display -->
+											<t t-call="personil_internal">
+												<!-- <t t-set="arg_max" t-value="5" /> -->
+											</t>
+										</div>
+										<div>
+											Personil Eksternal
+											<!-- Uncomment script di bawah untuk follower (3/3) avatar display -->
+											<t t-call="personil_eksternal">
+												<!-- <t t-set="arg_max" t-value="5" /> -->
+											</t>
+										</div>
+										<div>
+											<field name="state" widget="kanban_state_selection" />
+										</div>
+									</div> <!-- oe_kanban_footer -->
+								</div><!-- oe_kanban_content -->
+								<div class="oe_clear" />
+							</div><!-- kanban color -->
+						</t>
+					</templates>
+				</kanban> <!-- end Kanban Arc -->
+			</field> <!-- end arch -->
+		</record> <!-- end view generic -->
+
+
+
+	</data>
+</odoo>

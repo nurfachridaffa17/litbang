@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="surat_masuk_fix" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name">Surat Masuk </field>
+			<field name="res_model">surat_masuk_fix</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('tujuan_surat.user_id','=', uid)]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Belum Ada Surat Masuk</p>
+			</field>
+		</record>
+		
+		
+		<record id="surat_masuk_fix_tu" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name">Surat Masuk </field>
+			<field name="res_model">surat_masuk_fix</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain"></field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,graph,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Masuk</p>
+			</field>
+		</record>
+		
+
+		<record id="surat_keluar" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Keluar </field>
+			<field name="res_model">surat_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Keluar</p>
+			</field>
+		</record>
+
+		<record id="surat_keluar_inbox" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Keluar (Inbox)</field>
+			<field name="res_model">surat_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('konseptor.user_id','=', uid)]</field>
+			<!-- <field name="domain">[]</field> -->
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Keluar</p>
+			</field>
+		</record>
+
+
+		<record id="surat_keluar_inbox_np" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Keluar (Inbox Pimpinan)</field>
+			<field name="res_model">surat_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Keluar</p>
+			</field>
+		</record>
+
+
+		<record id="surat_keluar_outbox" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Keluar (Outbox)</field>
+			<field name="res_model">surat_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('create_uid','=', uid)]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Keluar</p>
+			</field>
+		</record>
+
+		
+		<record id="surat_internal_outbox" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Internal (Outbox)</field>
+			<field name="res_model">surat_internal</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('create_uid','=', uid)]</field>
+			<!-- <field name="domain">[]</field> -->
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">List Surat Internal (Outbox)</p>
+			</field>
+		</record>
+
+
+		<record id="surat_internal_inbox_acc" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Internal (Inbox)</field>
+			<field name="res_model">surat_internal</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('tujuan_surat.user_id','=', uid)]</field>
+			<!-- <field name="domain">[('konseptor.user_id','=', uid),('tujuan_surat','=', uid)]</field> -->
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">List Surat Internal (Inbox)</p>
+			</field>
+		</record>
+
+		<record id="surat_internal_inbox" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Waiting (ACC)</field>
+			<field name="res_model">surat_internal</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[('konseptor.user_id','=', uid)]</field>
+			<!-- <field name="domain">[('konseptor.user_id','=', uid),('tujuan_surat','=', uid)]</field> -->
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">List Surat Internal (Inbox)</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pengaturan_disposisi_act">
+			<field name="name"> Pengaturan</field>
+			<field name="res_model">pengaturan_disposisi</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Buat Disposisi</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="asal_surat_act">
+			<field name="name"> Asal Surat</field>
+			<field name="res_model">asal_surat</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Asal Surat</p>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="template_surat_act">
+			<field name="name"> Template Surat</field>
+			<field name="res_model">tnde.m_pengaturan_master_surat</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Template Surat</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kode_klasifikasi">
+			<field name="name"> Kode Klasifikasi</field>
+			<field name="res_model">kode_klasifikasi</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Kode Klasifikasi</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kode_primer">
+			<field name="name"> Kode Primer</field>
+			<field name="res_model">kode_primer</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Kode Primer</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kode_sekunder">
+			<field name="name"> Kode Sekunder</field>
+			<field name="res_model">kode_sekunder</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<!-- <field name="domain">[]</field> -->
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Kode Sekunder</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_kode_tersier">
+			<field name="name"> Kode Tersier</field>
+			<field name="res_model">kode_tersier</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Kode Tersier</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_arsip_sm">
+			<field name="name"> Arsip Surat Masuk</field>
+			<field name="res_model">arsip_surat_masuk_fix</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Arsip Surat Masuk</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="bidbag">
+			<field name="name"> Master Bidang / Bagian</field>
+			<field name="res_model">bidbag</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Bidang / Bagian</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="kategori_act">
+			<field name="name"> Master Kategori Surat</field>
+			<field name="res_model">tnde.kategori</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Data</p>
+			</field>
+		</record>
+
+
+		<!-- __Menu-Top__ -->
+		<menuitem name="TNDE" id="transaksi_menu_1" /> <!-- sequence="10" -->
+
+		<!-- __Menu-Level_1__ (Untuk Sub Menu TOP) -->
+		<!-- <menuitem name="Persuratan" parent="transaksi_menu_1" id="menu_persuratan"/> -->
+		
+		<menuitem name="Surat Masuk" parent="transaksi_menu_1" id="menu_surat_masuk_fix" action="surat_masuk_fix" />
+		<menuitem name="Surat Masuk TU" parent="transaksi_menu_1" id="menu_surat_masuk_fix_tu" action="surat_masuk_fix_tu"/>
+	
+		<menuitem name="Surat Keluar" parent="transaksi_menu_1" id="menu_surat_keluar"/>
+		<menuitem name="Menunggu ACC" parent="menu_surat_keluar" id="menu_surat_keluar_inbox_np" action="surat_keluar_inbox_np" />
+		<menuitem name="Inbox" parent="menu_surat_keluar" id="menu_surat_keluar_inbox" action="surat_keluar_inbox" />
+		<menuitem name="Outbok" parent="menu_surat_keluar" id="menu_surat_keluar_outbox" action="surat_keluar_outbox" />
+
+		<menuitem name="Surat Internal" parent="transaksi_menu_1" id="menu_surat_internal"/>
+		<menuitem name="Waiting ACC" parent="menu_surat_internal" id="menu_surat_internal_inbox" action="surat_internal_inbox" />
+		<menuitem name="Inbox" parent="menu_surat_internal" id="menu_surat_internal_inbox_acc" action="surat_internal_inbox_acc" />
+		<menuitem name="Outbok" parent="menu_surat_internal" id="menu_surat_internal_outbox" action="surat_internal_outbox" />
+		
+		<!-- __Menu-Level_2__ (Untuk Sub Menu TOP 2) -->
+		<menuitem name="Pengaturan" parent="transaksi_menu_1" id="menu_pengaturan"/>
+		<menuitem name="TNDE" parent="menu_pengaturan" id="menu_tnde"/>
+		
+		<menuitem name="Template Surat" parent="menu_pengaturan" id="menu_template_surat" action="template_surat_act" /> 
+		<!-- <menuitem name="Disposisi Surat" parent="menu_pengaturan" id="menu_pengaturan_disposisi" action="pengaturan_disposisi_act" /> -->
+		<menuitem name="Kategori Surat" parent="menu_pengaturan" id="menu_kategori" sequence="2" action="kategori_act" />
+		<menuitem name="Lembaga" parent="menu_pengaturan" id="menu_asal_surat" action="asal_surat_act" />
+		<menuitem name="Bidang / Bagian" parent="menu_pengaturan" id="menu_bid" action="bidbag" />
+
+		<menuitem name="Arsip" parent="menu_pengaturan" id="menu_arsip"/>
+		<menuitem name="Kode Klasifikasi" parent="menu_arsip" id="menu_kode_klasifikasi" action="act_kode_klasifikasi" /> 
+		<menuitem name="Kode Primer" parent="menu_arsip" id="menu_kode_primer" action="act_kode_primer" /> 
+		<menuitem name="Kode Sekunder" parent="menu_arsip" id="menu_kode_sekunder" action="act_kode_sekunder" /> 
+		<menuitem name="Kode Tersier" parent="menu_arsip" id="menu_kode_tersier" action="act_kode_tersier" /> 
+
+
+		<menuitem name="Arsip Surat" parent="transaksi_menu_1" id="menu_arsip_surat"/>
+		<menuitem name="Arsip Surat Surat Masuk" parent="menu_arsip_surat" id="menu_arsip_sm" action="act_arsip_sm" /> 
+
+
+
+		<menuitem name="Arsip" parent="transaksi_menu_1" id="menu_kearsipan"/>
+		<!-- <menuitem name="Master Nomor Arsip" parent="menu_kearsipan" id="master_no_arsip" action="act_master_nomor" />  -->
+
+
+
+	</data>
+</odoo>

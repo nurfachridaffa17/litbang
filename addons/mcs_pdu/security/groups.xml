@@ -1,0 +1,22 @@
+<odoo>
+	<data>
+        <record model="ir.module.category" id="module_category_pdu">
+            <field name="name">PDU</field>
+        </record>
+
+        <record model="res.groups" id="group_pdu_user">
+            <field name="category_id" ref="mcs_pdu.module_category_pdu"/>
+            <field name="name">User</field>
+        </record>
+
+        <record model="res.groups" id="group_pdu_office">
+            <field name="category_id" ref="mcs_pdu.module_category_pdu"/>
+            <field name="name">Office</field>
+        </record>
+
+        <record model="res.groups" id="group_pdu_manager">
+            <field name="category_id" ref="mcs_pdu.module_category_pdu"/>
+            <field name="name">Manager</field>
+        </record>
+    </data>
+</odoo>

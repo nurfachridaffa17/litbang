@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Parent -->
+    <menuitem id="rengar_top_menu" sequence="10" name="Anggaran &amp; Realisasi" web_icon="satker_rengar,static/description/icon.png"/>
+
+    <menuitem name="Perencanaan" id="menu_perencanaan" 
+              parent="rengar_top_menu" sequence="1" groups="satker_rengar.group_rengar_office"/>
+    <menuitem name="Rencana Program" id="menu_rencana_program" 
+              action="action_head_kertas_kerja" parent="menu_perencanaan" sequence="1" groups="satker_rengar.group_rengar_office"/>
+
+    <menuitem name="Kertas Kerja" id="menu_head_advance_expense_employee" 
+              parent="rengar_top_menu" sequence="2" groups="satker_rengar.group_rengar_user"/>
+    <menuitem name="Pengajuan Kertas Kerja" id="menu_head_advance_expense_request" 
+              action="action_pengajuan_kertas_kerja" parent="menu_head_advance_expense_employee" sequence="1" />
+    <menuitem name="Persetujuan Kertas Kerja" id="menu_head_advance_expense_approved" 
+              action="action_persetujuan_kertas_kerja" parent="menu_head_advance_expense_employee" sequence="2" 
+              groups="satker_rengar.group_rengar_manager"/>
+    <menuitem name="Proses Pagu Anggaran" id="menu_head_advance_expense_paid" action="action_head_kertas_kerja_paid"
+              parent="menu_head_advance_expense_employee" sequence="3" groups="account.group_account_user"/>
+
+    <menuitem name="Realisasi" id="menu_head_advance_expense_employee_realisasi" 
+              parent="rengar_top_menu" sequence="3" groups="satker_rengar.group_rengar_user"/>
+    <menuitem id="menu_head_advance_expense_request_realisasi" 
+              action="action_realisasi_kertas_kerja" parent="menu_head_advance_expense_employee_realisasi" sequence="1" />
+    <menuitem id="menu_head_advance_expense_request_realisasi_approve" 
+              action="action_realisasi_kertas_kerja_approve" parent="menu_head_advance_expense_employee_realisasi" sequence="1" />
+    <menuitem id="menu_head_advance_expense_request_realisasi_all" 
+              action="action_realisasi_kertas_kerja_all" parent="menu_head_advance_expense_employee_realisasi" sequence="1" />
+    <!-- <menuitem id="menu_head_advance_expense_request_realisasi" 
+              action="action_head_kertas_kerja_realisasi" parent="menu_head_advance_expense_employee_realisasi" sequence="1" /> -->
+    <!-- <menuitem id="menu_head_advance_expense_realisasi_approved" 
+              action="action_head_kertas_kerja_realisasi_approve" parent="menu_head_advance_expense_employee_realisasi" sequence="2" 
+              groups="satker_rengar.group_rengar_office"/> -->
+    <!-- <menuitem id="menu_head_advance_expense_realisasi_paid" action="action_head_kertas_kerja_realisasi_paid"
+              parent="menu_head_advance_expense_employee_realisasi" sequence="3"/> -->
+
+    <menuitem id="rengar_laporan_menu" parent="rengar_top_menu" sequence="4" name="Laporan"/>
+    <menuitem id="menu_monitoring_evaluasi" action="action_monitoring_evaluasi"
+              parent="rengar_laporan_menu" sequence="1"/>
+
+    <menuitem id="rengar_konfigurasi_menu" parent="rengar_top_menu" sequence="5" name="Konfigurasi" groups="satker_rengar.group_rengar_manager"/>
+    <menuitem name="Master Program" id="menu_master_program" action="action_rengar_program"
+              parent="rengar_konfigurasi_menu" sequence="1"/>
+    <menuitem name="Master Kegiatan" id="menu_master_kegiatan" action="action_rengar_kegiatan"
+              parent="rengar_konfigurasi_menu" sequence="2"/>
+    <menuitem name="Master Output" id="menu_master_output" action="action_rengar_output"
+              parent="rengar_konfigurasi_menu" sequence="3"/>
+    <menuitem name="Master Sub Output" id="menu_master_suboutput" action="action_rengar_suboutput"
+              parent="rengar_konfigurasi_menu" sequence="4"/>
+    <menuitem name="Master Komponen" id="menu_master_komponen" action="action_rengar_komponen"
+              parent="rengar_konfigurasi_menu" sequence="5"/>
+    <menuitem name="Master Sub Komponen" id="menu_master_subkomponen" action="action_rengar_subkomponen"
+              parent="rengar_konfigurasi_menu" sequence="6"/>
+    <menuitem name="Master Header 1" id="menu_master_detail1" action="action_rengar_detail1"
+              parent="rengar_konfigurasi_menu" sequence="7"/>
+    <menuitem name="Master Header 2" id="menu_master_detail2" action="action_rengar_detail2"
+              parent="rengar_konfigurasi_menu" sequence="8"/>
+    <menuitem name="Master Detail" id="menu_master_detail3" action="action_rengar_detail3"
+              parent="rengar_konfigurasi_menu" sequence="9"/>
+</odoo>

@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_demo_survey","access_demo_survey","model_survey_survey","demo_user_survey_groups",1,1,1,0
+"access_demo_ujicoba","access_demo_ujicoba","model_survey_ujicoba","demo_user_survey_groups",1,1,1,0
+"access_survey_polda","access_survey_polda","model_survey_polda","group_admin_bidgasbin",1,1,1,0
+"access_survey_polda","access_survey_polda","model_survey_polda","group_admin_bidgasops",1,1,1,0
+"access_survey_polda","access_survey_polda","model_survey_polda","group_admin_bidrikwastu",1,1,1,0
+"access_survey_polda","access_survey_polda","model_survey_polda","group_admin_baglabtekpol",1,1,1,0

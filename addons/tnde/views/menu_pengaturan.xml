@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+	<data>
+
+		<record model="ir.actions.act_window" id="pengaturan_disposisi_act">
+			<field name="name"> Pengaturan</field>
+			<field name="res_model">pengaturan_disposisi</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Buat Disposisi</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="asal_surat_act">
+			<field name="name"> Asal Surat</field>
+			<field name="res_model">asal_surat</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Tambah Asal Surat</p>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="perihal_act">
+			<field name="name"> Perihal Surat</field>
+			<field name="res_model">perihal</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Buat Perihal Surat</p>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="kategori_act">
+			<field name="name"> Kategori</field>
+			<field name="res_model">tnde.kategori</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Buat Perihal Surat</p>
+			</field>
+		</record>
+		
+		<!-- __Menu-Top__ -->
+		<menuitem name="Pengaturan" id="pengaturan_disposisi_menu_2" /> <!-- sequence="10" -->
+
+		
+		<!-- __Menu-Level_1__ (Untuk Sub Menu TOP) -->
+		<menuitem name="Disposisi Surat" parent="pengaturan_disposisi_menu_2"
+			id="sub_menu_pengaturan_disposisi" action="pengaturan_disposisi_act" />
+
+		<menuitem name="Asal Surat" parent="pengaturan_disposisi_menu_2"
+			id="sub_menu_asal_surat" action="asal_surat_act" />
+		
+		<menuitem name="Perihal Surat" parent="pengaturan_disposisi_menu_2"
+			id="sub_menu_perihal" action="perihal_act" />
+
+	</data>
+</odoo>

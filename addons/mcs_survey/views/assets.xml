@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<data>
+
+<template id="mystyle" name="My style" inherit_id="website.assets_frontend">
+    <xpath expr="link[last()]" position="after">
+    	<link rel="stylesheet" href="/mcs_survey/static/src/css/datatables.min.css" />
+    	<style type="text/css">
+			@media (max-width: 768px) {
+				#mid-header-bottom {
+					display:none;
+				}
+			}
+			
+		</style>		
+    </xpath>
+    <xpath expr="script[last()]" position="after">    	
+    	<script type="text/javascript" src="/mcs_survey/static/src/js/datatables.min.js"></script>
+    </xpath>
+</template>
+
+</data>
+</odoo>

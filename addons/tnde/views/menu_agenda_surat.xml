@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="agenda_surat_masuk" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Masuk </field>
+			<field name="res_model">surat_masuk</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Masuk</p>
+			</field>
+		</record>
+
+		<record id="agenda_surat_keluar" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Surat Keluar </field>
+			<field name="res_model">surat_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Surat Keluar</p>
+			</field>
+		</record>
+		
+		<record id="agenda_nodin_masuk" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Nota Dinas Masuk </field>
+			<field name="res_model">nodin_masuk</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Nota Dinas Masuk</p>
+			</field>
+		</record>
+ 		
+		<record id="agenda_nodin_keluar" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name"> Nota Dinas Keluar </field>
+			<field name="res_model">nodin_keluar</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,graph</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Silahkan Buat Nota Dinas Keluar</p>
+			</field>
+		</record>
+		
+		<!-- __Menu-Top__ -->
+		<menuitem name="Agenda Surat" id="agenda_menu_1" /> <!-- sequence="10" -->
+
+		<!-- __Menu-Level_1__ (Untuk Sub Menu TOP) -->
+		<menuitem name="Agenda Surat Masuk" parent="agenda_menu_1" id="menu_surat_masuk" action="agenda_surat_masuk" />
+		<menuitem name="Agenda Surat Keluar" parent="agenda_menu_1" id="menu_surat_keluar" action="agenda_surat_keluar" />
+		<menuitem name="Agenda Nota Dinas Masuk" parent="agenda_menu_1" id="menu_nodin_masuk" action="agenda_nodin_masuk" />
+		<menuitem name="Agenda Nota Dinas Keluar" parent="agenda_menu_1" id="menu_nodin_keluar" action="agenda_nodin_keluar" /> 
+		
+	</data>
+</odoo>

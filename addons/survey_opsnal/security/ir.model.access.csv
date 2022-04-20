@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_survey_bidgasopsnal,access.survey.bidgasopsnal,model_survey_survey,,1,1,1,1
+access_survey_jenispenelitian,access.survey.jenispenelitian,model_survey_jenispenelitian,,1,1,1,1
+access_survey_polres,access.survey.polres,model_survey_polres,,1,1,1,1
+access_survey_polda,access.survey.polda,model_survey_polda,,1,1,1,1

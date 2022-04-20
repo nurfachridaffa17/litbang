@@ -1,0 +1,105 @@
+<odoo>
+    <data>
+        <record id="product_material_tree" model="ir.ui.view">
+            <field name="name">view_product_material_tree</field>
+            <field name="model">product.material</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="vendor_id"/>
+                    <field name="merk"/>
+                    <field name="type"/>
+                    <field name="country"/>
+                    <field name="pengujian_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_material_form" model="ir.ui.view">
+            <field name="name">view_product_material_form</field>
+            <field name="model">product.material</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name" string="Nama Material"/>
+                            <h1><field name="name" placeholder="Nama Material"/></h1>
+                        </div>
+                        <notebook>
+                            <page string="Info" name="general_information">
+                                <group>
+                                    <group name="group_general" string="Info Umum">
+                                        <field name="categ_id" context="{'group_by': ['kategori_id']}"/>
+                                        <field name="vendor_id"/>
+                                    </group>
+                                    <!-- <group name="group_standard" string="Sertifikasi">
+                                        <field name="no_sertifikat"/>
+                                        <field name="masa_sertifikat" string="Berlaku s/d"/>
+                                        <field name="nilai_uji"/>
+                                        <field name="hasil_uji"/>
+                                    </group> -->
+                                </group>
+                            </page>
+                            <page string="Spesifikasi" name="notes">
+                                <group>
+                                    <group>
+                                        <field name="merk"/>
+                                        <field name="type"/>
+                                        <field name="country"/>
+                                    </group>
+                                    <group>
+                                    </group>
+                                </group>
+                                <group name="description">
+                                    <field name="description" colspan="4" nolabel="1" placeholder=""/>
+                                </group>
+							</page>
+                            <page string="Sertifikasi" name="sertifikat">
+								<field name="pengujian_ids"/>
+							</page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_material_kanban" model="ir.ui.view">
+            <field name="name">Product Kanban</field>
+            <field name="model">product.material</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('product.material', 'image', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                    <ul>
+                                        <li>Merk: <field name="merk"></field></li>
+                                        <li>Type: <field name="type"></field></li>
+                                    </ul>
+                                    <strong><field name="vendor_id"/></strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    </data>
+</odoo>

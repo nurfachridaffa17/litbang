@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <record id="channel_dashboard_kanban_view" model="ir.ui.view">
+            <field name="name">custom.dashboard.view</field>
+            <field name="model">custom.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_salesteam_kanban o_project_kanban" create="0">
+                    <field name="color"/>
+                    <field name="name"/>
+                    <field name="column1_count"/>
+                    <field name="column2_count"/>
+                    <field name="column3_count"/>
+                    <field name="column4_count"/>
+                    <field name="column5_count"/>
+                    <field name="column6_count"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} " style="height:200px">
+                                <!-- <div class="o_project_kanban_manage">
+                                    <a class="o_kanban_manage_toggle_button" href="#" style="margin-top:10px">More
+                                        <i class="fa fa-caret-down"/>
+                                    </a>
+                                </div> -->
+                                <div class="o_project_kanban_boxes" style="width:25%">
+                                    <a class="o_project_kanban_box" name="view_column1" type="object" style="background-color:#4276A4">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column1_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Pengajuan</span>
+                                    </a>
+                                    <a class="o_project_kanban_box" name="view_column2" type="object">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column2_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Disposisi</span>
+                                    </a>
+                                    <a class="o_project_kanban_box" name="view_column3" type="object" style="background:rgb(223, 169, 65);">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column3_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Surat Perintah</span>
+                                    </a>
+                                </div>
+                                <div class="o_project_kanban_main" style="margin-top:30px; width:50%;">
+                                    <div class="o_kanban_card_content o_visible">
+                                        <div class="o_kanban_primary_left" >
+                                            <div>
+                                                <center>
+                                                    <span>
+                                                        <t t-field="record.name.value"/>
+                                                    </span>
+                                                </center>
+                                            </div>
+                                            <div>
+                                                <center>
+                                                    <i class="fa fa-tags fa-10x"/>
+                                                    <h3>Dashboard</h3>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_card_manage_pane o_invisible">
+                                        <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                            <div class="o_kanban_card_manage_title">
+                                                <span>View</span>
+                                            </div>
+                                        </div>
+                                        <div t-if="widget.editable" class="o_project_kanban_colorpicker" >
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_project_kanban_boxes" style="width:25%">
+                                    <a class="o_project_kanban_box" name="view_column4" type="object" style="background:rgb(220, 39, 81)">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column4_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Surat Undangan</span>
+                                    </a>
+                                    <a class="o_project_kanban_box" name="view_column5" type="object" style="background-color:#2b6115">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column5_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Pengujian</span>
+                                    </a>
+                                    <a class="o_project_kanban_box" name="view_column6" type="object" style="background:rgb(162, 70, 137)">
+                                        <span class="o_value" style="overflow:visible !important">
+                                            <t t-esc="record.column6_count.value"/>
+                                        </span>
+                                        <span class="o_label" style="overflow:visible !important">Berita Acara</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="custom_dashboard_action" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">custom.dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="context">{}</field>
+            <field name="view_mode">kanban</field>
+        </record>
+
+        <!-- <menuitem id="menu_custom_dashboard" name="Dashboard" action="custom_dashboard_action" parent="menu_pdu" sequence="-1"/> -->
+    </data>
+</odoo>

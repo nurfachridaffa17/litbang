@@ -1,0 +1,46 @@
+<odoo>
+  <data>
+
+    <!-- actions opening views on models -->
+    <!--
+    <record  id="tnde.action_window" model="ir.actions.act_window">
+      <field name="name">tnde window</field>
+      <field name="res_model">tnde.tnde</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action -->
+    <!--
+    <record model="ir.actions.server" id="tnde_action_server">
+      <field name="name">tnde server</field>
+      <field name="model_id" ref="model_tnde_tnde"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item (Root) -->
+    <!--
+    <menuitem name="tnde" id="tnde_menu_root"/>
+    -->
+    <!-- menu Level 1 (categories) -->
+    <!--
+    <menuitem name="Menu 1" id="tnde_menu_1" parent="tnde_menu_root"/>
+    <menuitem name="Menu 2" id="tnde_menu_2" parent="tnde_menu_root"/>
+    -->
+    <!-- menu Level 2 (Call Actions) -->
+    <!--
+    <menuitem name="List" id="tnde_menu_1_list" parent="tnde_menu_1"
+              action="tnde_action_window"/>
+    <menuitem name="Server to list" id="tnde" parent="tnde_menu_2"
+              action="tnde_action_server"/>
+    -->
+    
+  </data>
+</odoo>

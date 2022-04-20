@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_survey_polda,access_survey_polda,model_survey_polda,group_admin_bidgasbin,1,1,1,0
+access_survey_polda,access_survey_polda,model_survey_polda,group_admin_bidgasops,1,1,1,0
+access_survey_polda,access_survey_polda,model_survey_polda,group_admin_bidrikwastu,1,1,1,0
+access_survey_polda,access_survey_polda,model_survey_polda,group_admin_baglabtekpol,1,1,1,0
+
+group_admin_bidgasbin_survey_survey_id,group_admin_bidgasbin survey,model_survey_survey,group_admin_bidgasbin,1,1,1,1
+group_admin_bidgasops_survey_survey_id,group_admin_bidgasops survey,model_survey_survey,group_admin_bidgasops,1,1,1,1
+group_admin_bidrikwastu_survey_survey_id,group_admin_bidrikwastu survey,model_survey_survey,group_admin_bidrikwastu,1,1,1,1
+group_admin_baglabtekpol_survey_survey_id,group_admin_baglabtekpol survey,model_survey_survey,group_admin_baglabtekpol,1,1,1,1
+read_all_survey_survey_id,read_all survey,model_survey_survey,,1,0,0,0

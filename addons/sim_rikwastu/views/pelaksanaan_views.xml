@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ################################################## Create Date/Time: 
+	Aug 7, 2018/2:29:50 PM Author: Matrica-User ################################################## -->
+
+<odoo>
+	<data>
+		<!-- ________ pelaksanaan view form _______ -->
+		<record model="ir.ui.view" id="pelaksanaan_view_form_id">
+			<field name="name">pelaksanaan.form</field>
+			<field name="model">rikwastu.pelaksanaan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (form) -->
+				<form string="pelaksanaan Form">
+					<header>
+						<!-- tp_button_workflow_db, tp_button_workflow_engine disini -->
+						<!-- tp_button_smart_button disini -->
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" string="Nama" />
+							<h1>
+								<field name="name" />
+							</h1>
+						</div>
+
+						<group>
+							<!-- Blok Grup Utama, terdiri dari beberapa grup didalamnya -->
+							<group colspan="4" col='4'>
+								<!-- Grup Kiri atau Grup Atas kalau di handphone -->
+								<group string="Lokasi / Wilayah" colspan="2" col="2">
+									<field name="prov_id" />
+									<field name="kota_id" domain="[('state_id','=',prov_id)]" />
+								</group>
+								<!-- Grup Kanan atau Grup Bawah kalau di handphone -->
+								<!-- <group string="File Laporan Sementara" colspan="2" col="2">
+									<field name="lap_sementara" widget="binary" filename="file_name" />
+									<field name="file_name" invisible="1" />
+								</group> -->
+							</group>
+
+						</group>
+
+						<notebook colspan="2">
+							<!-- batas tab 1 Penyusunan Tim -->
+							<page string="Penyusunan Tim">
+								<group colspan="1" col='1'>
+									<!-- Grup Kiri atau Grup Atas kalau di handphone -->
+									<group string="Tim Internal">
+										<field name="tim_internal_ids" nolabel="1" />
+									</group>
+									<!-- Grup Kanan atau Grup Bawah kalau di handphone -->
+									<group string="Tim Eksternal">
+										<field name="tim_eksternal_ids" nolabel="1" />
+									</group>
+								</group>
+							</page>
+							<!-- batas tab 2 Langkah Kerja dan Timeline -->
+							<page string="Langkah Kerja dan Timeline">
+								<field name="langkah_kerja_ids">
+									<tree string="kolom-kolom" editable="bottom">
+										<field name="name" string="Nama Kegiatan" />
+										<field name="tgl_mulai" />
+										<field name="tgl_akhir" />
+										<field name="status_pekerjaan" readonly="1" />
+										<field name="dok_pendukung_ids" widget="many2many_binary"
+											readonly="1" />
+										<field name="keterangan" readonly="1" />
+									</tree>
+								</field>
+							</page>
+							<!-- batas tab 3 Deskripsi -->
+							<page string="Deskripsi">
+								<field name="deskripsi" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- ________ pelaksanaan_upload view form _______ -->
+		<record model="ir.ui.view" id="pelaksanaan_upload_view_form_id">
+			<field name="name">pelaksanaan_upload.form</field>
+			<field name="model">rikwastu.pelaksanaan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (form) -->
+				<form string="pelaksanaan_upload Form">
+					<header>
+						<!-- tp_button_workflow_db, tp_button_workflow_engine disini -->
+						<!-- tp_button_smart_button disini -->
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" string="Nama" />
+							<h1>
+								<field name="name" readonly="1" />
+							</h1>
+						</div>
+						<field name="file_name" invisible="1" />
+
+						<!-- Blok Grup Utama, terdiri dari beberapa grup didalamnya -->
+						<group colspan="1" col='1'>
+
+							<!-- Grup Kanan atau Grup Bawah kalau di handphone -->
+							<group string="File Laporan Sementara">
+								<field name="lap_sementara" widget="binary" filename="file_name" />
+
+							</group>
+							<group string="Menyusun Laporan Sementara">
+								<field name="dok_lap_sementara" nolabel="1" />
+							</group>
+						</group>
+
+					</sheet>
+				</form>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- ________ pelaksanaan view tree _______ -->
+		<record model="ir.ui.view" id="pelaksanaan_view_tree_id">
+			<field name="name">pelaksanaan.list</field>
+			<field name="model">rikwastu.pelaksanaan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (tree) -->
+				<tree string="pelaksanaan list">
+					<field name="name" />
+					<field name="prov_id" />
+					<field name="kota_id" />
+					<field name="langkah_kerja_ids" />
+					<field name="tim_internal_ids" />
+					<field name="tim_eksternal_ids" />
+					<!-- <field name="create_date" string="Tanggal Created" /> <field name="create_uid" 
+						string="Dibuat Oleh" /> -->
+					<button name="view_perencanaan" type="object" string="View Perencanaan" />
+					<button name="validasi_pelaksanaan" type="object" string="Tindakan" />
+					<button name="laporan_sementara" type="object"
+						string="Buat Laporan Sementara" />
+				</tree>
+			</field> <!-- end arch -->
+		</record>
+
+		<!-- ________ pelaksanaan view search _______ -->
+		<record model="ir.ui.view" id="pelaksanaan_view_search_id">
+			<field name="name">pelaksanaan.search</field>
+			<field name="model">rikwastu.pelaksanaan</field>
+			<field name="arch" type="xml">
+				<!-- Konten: tp_arch_*_component (search) -->
+				<search>
+					<field name="name" />
+					<field name="thn" />
+				</search>
+			</field> <!-- end arch -->
+		</record>
+
+	</data>
+</odoo>

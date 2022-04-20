@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+
+		<record id="group_Asset" model="ir.module.category">
+			<field name="name">Aset</field>
+		</record>
+
+		<record model="res.groups" id="group_asset_manager"> 
+		    <field name="category_id" ref="mcs_asset.group_Asset" /> 
+		    <field name="name">Manager</field> 
+		</record>
+			
+		<record model="res.groups" id="group_asset_user"> 
+		    <field name="category_id" ref="mcs_asset.group_Asset" /> 
+		    <field name="name">User</field> 
+		</record>
+
+
+    </data>
+</openerp>

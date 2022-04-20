@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="expense_form_view_advance_req" model="ir.ui.view">
+            <field name="name">hr.expense.form</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="advance_expense_id" string="No. Kertas Kerja" domain="[('employee_id', '=', employee_id),('product_id', '=', product_id),('reambursment', '=', False)]"/>
+                    <field name="advance_currency_id" invisible="1" />
+                    <field name="advance_amount" string="Pagu" widget="monetary" options="{'currency_field': 'advance_currency_id'}"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Detail">
+                            <field name="advance_expense_line_ids">
+                                <tree editable="bottom">
+                                    <field name="description"/>
+                                    <field name="quantity" string="Volume"/>
+                                    <field name="unit_amount" string="Harga Satuan" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                                    <field name="total_amount" string="Jumlah Biaya" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="string">Realisasi</attribute>
+                </xpath>
+                <xpath expr="//label[@for='name']" position="attributes">
+                    <attribute name="string">Deskripsi Realisasi</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="placeholder">e.g. Makan Siang dengan Pelanggan</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_expenses_tree_inherit" model="ir.ui.view">
+            <field name="name">view_expenses_tree_inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.view_expenses_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Deskripsi Realisasi</attribute>
+                </xpath>
+                <xpath expr="//field[@name='total_amount']" position="before">
+                    <field name="advance_amount" string="Pagu"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

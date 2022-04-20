@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- Action harus dideklarasi sebelum menu -->
+		<record id="act_jurnal" model="ir.actions.act_window">
+			<!-- Nama action ini muncul di breadcrump -->
+			<field name="name">Data Jurnal</field>
+			<field name="res_model">jurnal</field>
+			<field name="target">current</field>
+			<field name="context">{}</field> <!-- {'state': 'open'} -->
+			<field name="domain">[]</field>
+			<field name="limit">80</field> <!-- max 80 baris dlm 1 page -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!-- pilihan view_mode: tree,form,graph,calendar,kanban,pivot,gantt -->
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Belum Ada Data</p>
+			</field>
+		</record>
+		
+		<!-- __Menu-Top__ -->
+		<menuitem name="Jurnal" id="menu_induk" /> <!-- sequence="10" -->
+		<menuitem name="Data Jurnal" parent="menu_induk" id="menu_jurnal" action="act_jurnal" />
+	
+
+
+
+	</data>
+</odoo>
