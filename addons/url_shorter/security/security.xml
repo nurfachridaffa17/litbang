@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="url_shorter_rule_global" model="ir.rule">
+        <field name="name">Only the onwer can access the url</field>
+        <field name="model_id" ref="model_url_shorter"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="global" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    
+    <record id="url_shorter_redirect_rule_global" model="ir.rule">
+        <field name="name">Only the onwer of the url can access the redirects</field>
+        <field name="model_id" ref="model_url_shorter_redirect"/>
+        <field name="domain_force">[('url_shorter_id.create_uid', '=', user.id)]</field>
+        <field name="global" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

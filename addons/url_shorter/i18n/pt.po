@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* url_shorter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-22 23:42+0000\n"
+"PO-Revision-Date: 2017-06-22 23:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_accessed
+msgid "Accessed"
+msgstr "Acedido"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_active
+msgid "Active"
+msgstr "Ativo"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_search
+msgid "Archived"
+msgstr "Arquivado"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_redirection_search
+msgid "Country"
+msgstr "País"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_create_uid
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_create_date
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_display_name
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_display_name
+msgid "Display Name"
+msgstr "Nome a Exibir"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_expiration_date
+msgid "Expiration date"
+msgstr "Data de expiração"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_form
+msgid "Generate new token"
+msgstr "Gerar um novo token"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_redirection_search
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_id
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_id
+msgid "ID"
+msgstr "Id."
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter___last_update
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect___last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_write_uid
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_write_date
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_long_url
+msgid "Long URL"
+msgstr "URL Longo"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_name
+msgid "Name"
+msgstr "Nome"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_ids
+msgid "Redirect ids"
+msgstr "IDS de redirecionamento"
+
+#. module: url_shorter
+#: model:ir.actions.act_window,name:url_shorter.action_url_2_redirection
+msgid "Redirection"
+msgstr "Redirecionamento"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_number
+msgid "Redirects"
+msgstr "Redirecionamentos"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_form
+msgid "Renew"
+msgstr "Renovar"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_short_url
+msgid "Short URL"
+msgstr "URL Curto"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_url_shorter_id
+msgid "Shorted URL"
+msgstr "URL encurdado"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_country_id
+msgid "Source country"
+msgstr "País de origem"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_redirect_source_ip
+msgid "Source ip"
+msgstr "IP de origem"
+
+#. module: url_shorter
+#: model:ir.model.fields,field_description:url_shorter.field_url_shorter_token
+msgid "Token"
+msgstr "Token"
+
+#. module: url_shorter
+#: sql_constraint:url.shorter:0
+msgid "Token must be unique!"
+msgstr "O Token tem de ser único!"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_redirection_search
+msgid "URL Redirection"
+msgstr "Redirecionamento de URL"
+
+#. module: url_shorter
+#: model:ir.actions.act_window,name:url_shorter.url_shorter_action
+#: model:ir.ui.menu,name:url_shorter.menu_url_shorter
+msgid "URL Shorter"
+msgstr "Encortar URL"
+
+#. module: url_shorter
+#: model:ir.actions.server,name:url_shorter.action_redirect_map_ip
+msgid "URL Shorter Redirect: Map IP to country"
+msgstr "Redirecionamento URL: Mapear IP ao país"
+
+#. module: url_shorter
+#: model:ir.ui.view,arch_db:url_shorter.url_shorter_search
+msgid "URLs"
+msgstr "URLs"
+
+#. module: url_shorter
+#: model:ir.model,name:url_shorter.model_url_shorter
+msgid "url.shorter"
+msgstr "url.shorter"
+
+#. module: url_shorter
+#: model:ir.model,name:url_shorter.model_url_shorter_redirect
+msgid "url.shorter.redirect"
+msgstr "url.shorter.redirect"
+

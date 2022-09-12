@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_url_shorter,url.shorter,model_url_shorter,base.group_user,1,1,1,1
+access_url_shorter_redirect,url.shorter.redirect,model_url_shorter_redirect,base.group_user,1,1,1,1
