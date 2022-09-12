@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="survey_question_form_inherit_2">
+		    <field name="name">Survey Question Inherit</field>           
+		    <field name="model">survey.question</field>                                  
+		    <field name="inherit_id" ref="survey.survey_question_form"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="/form/sheet/notebook/page/field[@name='labels_ids']/tree/field[@name='quizz_mark']" position="replace">
+                    <field name="quizz_mark"/>
+		    	</xpath>
+		    </field>
+		</record>
+        
+    </data>
+</odoo>

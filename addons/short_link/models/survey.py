@@ -30,5 +30,3 @@ class ShortLink(models.Model):
                 self.short_link = shorten_res.json().get("link")
         except requests.exceptions.ConnectionError:
             shorten_res.status_code = "Connection refused"
-
-        

@@ -36,7 +36,7 @@ class SurveyController(http.Controller):
     def daftar_survey_allsurvey(self, **kw):
         Surveys = http.request.env['v.survey.survey']
         return http.request.render('mcs_survey.daftar_survey_all', {
-            'surveys': Surveys.sudo().search([('department_id','=',(32,33,34,35)),('public_publish','=',True)])
+            'surveys': Surveys.sudo().search([('public_publish','=',True)])
         })
 
     @http.route('/page/survey/bidgasbin/', auth='public', website=True)
@@ -73,6 +73,13 @@ class SurveyController(http.Controller):
         Surveys = http.request.env['survey.survey']
         return http.request.render('mcs_survey.daftar_survey_dokinfo', {
             'surveys': Surveys.search([('department_id','=',40),('public_publish','=',True)])
+        })
+    
+    @http.route('/page/survey/setpuslitbang/', auth='public', website=True)
+    def daftar_survey_setpuslitbang(self, **kw):
+        Surveys = http.request.env['survey.survey']
+        return http.request.render('mcs_survey.daftar_survey_setpuslitbang', {
+            'surveys': Surveys.search([('department_id','=',(39.37,38,36)),('public_publish','=',True)])
         })
 
     @http.route(['/survey/report/<model("survey.survey"):survey>'],

@@ -595,6 +595,105 @@
 				<script type="text/javascript" src="/mcs_survey/static/src/js/mcs_survey.js"></script>
 			</t>
 		</template>
+
+		<!-- === Daftar Survey Setpuslitbang === -->
+		<template id="daftar_survey_setpuslitbang" name="Daftar Survey Setpuslitbang">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<section class="s_title">
+				        <div class="container">
+				          <div class="row">
+				            <div class="col-md-12">
+				              <h1 class="text-center">
+				                <b style="color: rgb(85, 85, 85); font-size: 14px;">
+				                  <span style="color: rgb(57, 132, 198); font-family: Arial, sans-serif; font-size: 36px; line-height: 107%;">SURVEY SETPUSLITBANG</span>
+				                </b>
+				              </h1>
+				              <h3 class="text-center text-muted">
+				                <b style="color: rgb(85, 85, 85); font-size: 14px;">
+				                  <span style="font-family: Arial, sans-serif; font-size: 24px; line-height: 107%;" class="text-gray-light">(PEMERIKSAAN DAN PENGAWASAN MUTU)</span>
+				                </b>
+				              </h3>
+				            </div>
+				          </div>
+				        </div>
+				    </section>
+				    <section class="s_text_block bg-gray-lighter">
+					  <div class="container">
+						<div class="row">
+							<div class="mt32 mb48 col-md-12">
+								<div class="panel panel-primary o_panel s_panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Daftar Survey</h3>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive">
+											<table cellspacing="0" class="table table-hover table-striped" id="survey_bidgasbin_tbl" style="min-width:500px" width="100%">
+												<thead>
+													<tr>
+														<th width="30">No</th>
+														<th width="100">Responden</th>
+														<th width="200">Judul</th>
+														<th width="100">Mulai</th>
+														<th width="100">Selesai</th>
+														<th width="100">Total<br/>Jawaban</th>														
+														<!-- <th width="100">Detail</th> -->
+														<th width="100">Ikut Survey</th>
+														<th width="300">Narasi</th>
+													</tr>
+												</thead>
+												<tbody>
+													<t t-set="no_urut" t-value="1" />
+													<t t-foreach="surveys" t-as="survey">
+														<tr>
+															<td>
+																<t t-esc="no_urut" />
+															</td>
+															<td>
+																<t t-esc="survey.responden" />
+															</td>
+															<td>
+																<t t-esc="survey.title" />
+															</td>
+															<td>
+																<t t-if="survey.date_start">
+																	<t t-esc="time.strftime('%d %b %Y',time.strptime(survey.date_start,'%Y-%m-%d %H:%M:%S'))"/>
+																</t>
+															</td>
+															<td>
+																<t t-if="survey.date_end">
+																	<t t-esc="time.strftime('%d %b %Y',time.strptime(survey.date_end,'%Y-%m-%d %H:%M:%S'))"/>
+																</t>
+															</td>
+															<td>
+																<t t-esc="survey.tot_comp_survey" />
+															</td>
+															<!-- <td>
+																<a href="#" t-attf-onclick="window.open('#{survey.print_url}', '_self', 'width=750,height=250')"><i class="fa fa-eye"></i></a>
+															</td> -->
+															<td>
+																<a href="#" t-attf-onclick="window.open('#{survey.public_url}', '_self', 'width=750,height=250')"><i class="fa fa-pencil"></i></a>
+															</td>
+															<td>
+																<t t-esc="survey.narasi" />
+															</td>
+														</tr>
+														<t t-set="no_urut" t-value="no_urut+1" />
+													</t>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>					
+							</div>
+						</div>																				
+					</div>
+				  </section>
+				</div>
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+				<script type="text/javascript" src="/mcs_survey/static/src/js/mcs_survey.js"></script>
+			</t>
+		</template>
 		
 	</data>
 </odoo>

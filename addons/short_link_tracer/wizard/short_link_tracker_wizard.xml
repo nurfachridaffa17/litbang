@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="short_link_tracker_wizard">
+    <field name="name">wizard.short.link.tracker</field>
+    <field name="model">short.link.tracker.wizard</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Short Link Wizard" version="7.0">
+            <group>
+                <field name="short_link_tracker"/>
+            </group>
+            <footer>
+                <button name="get_short_link_tracker_wizard" string="Generate" type="object" />
+                <button name="cancel" string="Cancel" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+    </record>
+
+</odoo>

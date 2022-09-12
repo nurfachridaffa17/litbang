@@ -922,6 +922,30 @@ class APIController(http.Controller):
             "invalid object model",
             "The model %s is not available in the registry." % ioc_name,
         )
+    
+    @validate_token
+    @http.route("/api/webapi/login", type="http", auth="none", methods=["POST"], csrf=False)
+    def api_coba_1(self, id=None,**payload):
+        model = "api.coba"
+        ioc_name = model
+        _model = request.env[self._model].sudo().search([("model", "=", model)], limit=1)
+
+        if _model:
+            try:
+                resource = request.env[_model.model].sudo().create(payload)
+            except Exception as e:
+                return invalid_response("params", e)
+            else:
+                data = {"login" : resource.login}
+                if resource:
+                    return valid_response(data)
+                else:
+                    return valid_response(data)
+        return invalid_response(
+            "invalid object model",
+            "The model %s is not available in the registry." % ioc_name,
+        )
+    
 
     @validate_token
     @http.route("/api/survey/user_input_line", type="http", auth="none", methods=["GET"], csrf=False)
@@ -972,6 +996,60 @@ class APIController(http.Controller):
             fields = custFields
             domain = custDomain
             order = "user_input_id, id"
+            data = (request.env[_model.model].sudo().search_read(
+                domain = domain,
+                fields = fields,
+                offset = offset,
+                limit = limit,
+                order = order
+            ))
+            
+            if data:
+                return valid_response(data)
+            else:
+                return valid_response(data)
+        return invalid_response(
+            "Invalid object model",
+            "The model %s is not available in the registry." % ioc_name
+        )
+    
+    @validate_token
+    @http.route("/api/survey/short_link", type="http", auth="none", methods=["POST"], csrf=False)
+    def create_survey_short_link(self, id=None, **payload):
+        model = "link.tracker"
+        ioc_name = model
+        _model = request.env[self._model].sudo().search([("model", "=", model)], limit=1)
+        if _model:
+            try:
+                resource = request.env[_model.model].sudo().create(payload)
+            except Exception as e:
+                return invalid_response("params", e)
+            else:
+                data = {
+                    "id" : resource.id,
+                    "short_url": resource.short_url
+                }
+                if resource:
+                    return valid_response(data)
+                else:
+                    return valid_response(data)
+        return invalid_response(
+            "invalid object model",
+            "The model %s is not available in the registry." % ioc_name,
+        )
+    
+    @validate_token
+    @http.route("/api/get/clicked", type="http", auth="none", methods=["GET"], csrf=False)
+    def get_responden_clicked(self, id=None, **payload):
+        model = "link.tracker"
+        ioc_name = model
+        _model = request.env[self._model].sudo().search([("model", "=", model)], limit=1)
+        
+        custFields = ['count', 'url', 'title']
+
+        if _model:
+            domain, fields, offset, limit, order = extract_arguments(payload)
+            fields = custFields
             data = (request.env[_model.model].sudo().search_read(
                 domain = domain,
                 fields = fields,
@@ -1266,34 +1344,3 @@ class APIController(http.Controller):
         else:
             return valid_response("record %s has been successfully patched" % record.id)
 
-
-################################################## Link Tracker ##########################################################
-
-    @validate_token
-    @http.route("/api/link.tracker", type="http", auth="none", methods=["GET"], csrf=False)
-    def get_link_tracker(self, model=None, id=None, **payload):
-        model = "link.tracker"
-        ioc_name = model
-        _model = request.env[self._model].sudo().search([("model", "=", model)], limit=1)
-        
-        custFields = ['id', 'count', 'url', 'title']
-
-        if _model:
-            domain, fields, offset, limit, order = extract_arguments(payload)
-            fields = custFields
-            data = (request.env[_model.model].sudo().search_read(
-                domain = domain,
-                fields = fields,
-                offset = offset,
-                limit = limit,
-                order = order
-            ))
-            
-            if data:
-                return valid_response(data)
-            else:
-                return valid_response(data)
-        return invalid_response(
-            "Invalid object model",
-            "The model %s is not available in the registry." % ioc_name
-        )

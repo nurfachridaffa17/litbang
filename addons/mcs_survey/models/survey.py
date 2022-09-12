@@ -9,14 +9,6 @@ import base64
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 from xlsxwriter.workbook import Workbook
-
-# import selenium.webdriver as webdriver
-# import selenium.webdriver.support.ui as ui
-# from selenium.webdriver.common.keys import Keys
-# from time import sleep
-# import string
-# from docx import Document
-# from docx.shared import Inches
 import urllib2
 import numpy as np
 import collections
@@ -25,10 +17,6 @@ import urllib2
 
 
 from odoo import models, fields, api
-import locale
-from dateutil.relativedelta import relativedelta
-from openerp import tools
-from openerp import api, fields , models, _
 
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
 
@@ -66,16 +54,16 @@ class survey_survey(models.Model):
         else:
             self.public_publish = True
 
-    def act_link(self): 
-        ids = self.id
-        url = str('http://puslitbang.polri.go.id:8081/brt-api/generate/excell') + "/" +str(ids)
-        print('======= URL =========='), url
-        link = str(url)
-        return{
-            'type'      : 'ir.actions.act_url',
-            'url'       : link,
-            'target'    : 'new'
-            }
+    # def act_link(self): 
+    #     ids = self.id
+    #     url = str('http://puslitbang.polri.go.id:8081/brt-api/generate/excell') + "/" +str(ids)
+    #     print('======= URL =========='), url
+    #     link = str(url)
+    #     return{
+    #         'type'      : 'ir.actions.act_url',
+    #         'url'       : link,
+    #         'target'    : 'new'
+    #         }
 
     @api.multi
     def action_result_survey_admin(self):
@@ -86,19 +74,26 @@ class survey_survey(models.Model):
             'target': 'self',
             'url': self.with_context(relative_url=True).result_url
         }
+    
+    @api.multi
+    def action_survey_user_input(self):
+        action_rec = self.env.ref('survey.action_survey_user_input')
+        action = action_rec.read()[0]
+        ctx = dict(self.env.context)
+        ctx.update({'search_default_survey_id': self.ids[0],
+                    'search_default_completed': 1})
+        action['context'] = ctx
+        return action
         
     # @api.multi
     # def action_result_survey(self):
-    #     if not self.narasi:
-    #         raise Warning('Narasi Admin belum diisi');
-    #     else:
-    #         self.ensure_one()
-    #         return {
-    #             'type': 'ir.actions.act_url',
-    #             'name': "Results of the Survey",
-    #             'target': 'self',
-    #             'url': self.with_context(relative_url=True).result_url
-    #         }
+    #     self.ensure_one()
+    #     return {
+    #         'type': 'ir.actions.act_url',
+    #         'name': "Results of the Survey",
+    #         'target': 'self',
+    #         'url': self.with_context(relative_url=True).result_url
+    #     }
     
     @api.multi
     def action_link_mulai_survey(self):
