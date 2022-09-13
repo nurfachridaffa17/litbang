@@ -1016,7 +1016,7 @@ class APIController(http.Controller):
     @validate_token
     @http.route("/api/survey/short_link", type="http", auth="none", methods=["POST"], csrf=False)
     def create_survey_short_link(self, id=None, **payload):
-        model = "link.tracker"
+        model = "url.shorter"
         ioc_name = model
         _model = request.env[self._model].sudo().search([("model", "=", model)], limit=1)
         if _model:

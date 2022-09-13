@@ -2,23 +2,6 @@
 <odoo>
 
     <data>
-    
-        <!-- <record id="short_link_tracker_inherit" model="ir.ui.view">
-            <field name="field_name">Short Link Tracker Inherit</field>
-            <field name="model">survey.survey</field>                                  
-		    <field name="inherit_id" ref="survey.survey_form"/>
-		    <field name="arch" type="xml">
-				<xpath expr="//header" position="inside">
-					<button string="Get Short Link Tracker" name="get_short_link_tracker" type="object" class="oe_highlight"/>
-				</xpath>
-				<xpath expr="//notebook" position="before">
-					<group>
-						<field name="short_link_tracker" widget="url"/>
-					</group>
-			   </xpath>
-			</field>
-        </record> -->
-
 		<record id="whatsapp_survey_share" model="ir.ui.view">
             <field name="name">survey.survey_form</field>
             <field name="model">survey.survey</field>
@@ -34,7 +17,6 @@
 			   </xpath>
             </field>
         </record>
-    
     </data>
     
 

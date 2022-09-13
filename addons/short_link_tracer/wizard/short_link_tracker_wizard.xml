@@ -8,7 +8,9 @@
     <field name="arch" type="xml">
         <form string="Short Link Wizard" version="7.0">
             <group>
-                <field name="short_link_tracker"/>
+                <field name="survey_id" invisible="1"/>
+                <field name="token"/>
+                <field name="expiration_date"/>
             </group>
             <footer>
                 <button name="get_short_link_tracker_wizard" string="Generate" type="object" />
