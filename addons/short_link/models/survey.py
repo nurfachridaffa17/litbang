@@ -7,7 +7,7 @@ import json
 class ShortLink(models.Model):
     _inherit = 'survey.survey'
 
-    short_link = fields.Char("Short Link", copy=False)
+    short_link = fields.Char("Short Link Bitly", copy=False)
 
     @api.multi
     def get_short_link(self):
